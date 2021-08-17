@@ -61,7 +61,7 @@ flag to specify the location of the inventory file if not using the
 default. Hypothetically, this might look like the following example:
 
 ```bash
-$ ansible -i /home/ubuntu/ansible-course/Lab_3/my_inventory all -m ping
+ansible -i /home/ubuntu/ansible-course/Lab_3/my_inventory all -m ping
 ```
 
 
@@ -117,7 +117,7 @@ cd ~/Desktop/ansible-course/Lab_3 && cp my_inventory.yaml /etc/ansible/
 Now if you were to run the preceding inventory within Ansible, using a
 simple [shell] command, the result would appear as follows:
 
-```
+```console
 $ ansible -i /etc/ansible/my_inventory.yaml all -m shell -a 'echo hello-yaml' -f 5
 
 
@@ -360,7 +360,7 @@ frt02.example.com https_port=8443 lb_vip=lb.example.com
 If we run an ad hoc command against this inventory, we can see the
 contents of both of these variables:
 
-```
+```console
 $ ansible -i hostvars1-hostgroups-ini frontends -m debug -a "msg=\"Connecting to {{ lb_vip }}, listening on {{ https_port }}\""
 
 frt01.example.com | SUCCESS => {
@@ -392,7 +392,7 @@ Notice how much more readable that is? Yet, if we run the same command
 as before against our newly organized inventory, we see that the result
 is the same:
 
-```
+```console
 $ ansible -i groupvars1-hostgroups-ini frontends -m debug -a "msg=\"Connecting to {{ lb_vip }}, listening on {{ https_port }}\""
 
 frt01.example.com | SUCCESS => {
@@ -425,7 +425,7 @@ lb_vip=lb.example.com
 Now if we run our ad hoc command again with the new inventory, we can
 see that we have overridden the variable on one host:
 
-```
+```console
 $ ansible -i hostvars2-hostgroups-ini frontends -m debug -a "msg=\"Connecting to {{ lb_vip }}, listening on {{ https_port }}\""
 
 
@@ -461,7 +461,7 @@ very valuable.
 Running the same ad hoc command as before, you can see that the result
 is the same as for our INI-formatted inventory:
 
-```
+```console
 $ ansible -i hostvars2-hostgroups-yml frontends -m debug -a "msg=\"Connecting to {{ lb_vip }}, listening on {{ https_port }}\""
 
 frt01.example.com | SUCCESS => {
@@ -481,7 +481,7 @@ frt02.example.com | SUCCESS => {
 
 Let\'s start by creating a new directory structure for this purpose:
 
-```
+```console
 $ mkdir vartree
 $ cd vartree
 ```
@@ -534,6 +534,7 @@ dbms02.example.com
 ```
 
 Just for clarity, your final directory structure should look like this:
+(You may have to run `sudo apt install tree`)
 
 ```
 $  tree
@@ -550,7 +551,7 @@ $  tree
 10. Now, let\'s try running our familiar ad hoc command and see what
     happens:
 
-```
+```console
 $ cd /home/ubuntu/ansible-course/Lab_3/vartree
 $ ansible -i inventory frontends -m debug -a "msg=\"Connecting to {{ lb_vip }}, listening on {{ https_port }}\""
 
@@ -594,7 +595,7 @@ groups, especially as your playbooks get bigger and more complex.
 Even with more finely divided directory structure, the result of
 running the ad hoc command is still the same:
 
-```
+```console
 $ ansible -i inventory frontends -m debug -a "msg=\"Connecting to {{ lb_vip }}, listening on {{ https_port }}\""
 
 frt01.example.com | SUCCESS => {
@@ -648,7 +649,7 @@ testvar=group
 Now, let\'s run an ad hoc command to see what value of [testvar]
 is actually set:
 
-```
+```console
 $ cd /home/ubuntu/ansible-course/Lab_3
 $ ansible -i hostgroups-children-vars-ini ubuntu -m debug -a "var=testvar"
 
@@ -708,7 +709,7 @@ output concise and readable:
 1.  We have already mentioned the special [all] group to specify
     all hosts in the inventory:
 
-```
+```console
 $ ansible -i hostgroups-children-ini all --list-hosts
 
   hosts (7):
@@ -725,7 +726,7 @@ The asterisk character has the same effect as [all], but needs to
 be quoted in single quotes for the shell to interpret the command
 properly:
 
-```
+```console
 $ ansible -i hostgroups-children-ini '*' --list-hosts
 
   hosts (7):
@@ -741,7 +742,7 @@ $ ansible -i hostgroups-children-ini '*' --list-hosts
 2.  Use [:] to specify a logical [OR], meaning \"apply to
     hosts either in this group or that group,\" as in this example:
 
-```
+```console
 $ ansible -i hostgroups-children-ini frontends:apps --list-hosts
 
   hosts (4):
@@ -757,7 +758,7 @@ $ ansible -i hostgroups-children-ini frontends:apps --list-hosts
     special character in the shell and so you must quote your pattern
     string in single quotes for it to work, as in this example:
 
-```
+```console
 $ ansible -i hostgroups-children-ini 'all:!apps' --list-hosts
 
   hosts (5):
@@ -773,7 +774,7 @@ $ ansible -i hostgroups-children-ini 'all:!apps' --list-hosts
     group and the [apps] group (again, you must use single quotes
     in the shell):
 
-```
+```console
 $ ansible -i hostgroups-children-ini 'centos:&apps' --list-hosts
 
   hosts (2):
@@ -801,7 +802,7 @@ host pattern on the command line is only supported for the
 following:
 
 
-```
+```console
 $ ansible-playbook -i hostgroups-children-ini site.yml --limit frontends:apps
 
 
