@@ -27,7 +27,7 @@ The labs refer to the following machines:
 If not already present, Add the following lines to the file `/etc/hosts`
 
 ```bash
-sudo vi /etc/hosts/
+sudo vi /etc/hosts
 ```
 
 
