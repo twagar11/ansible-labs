@@ -60,7 +60,7 @@ Ansible configuration file). Most Ansible commands use the [-i]
 flag to specify the location of the inventory file if not using the
 default. Hypothetically, this might look like the following example:
 
-```
+```bash
 $ ansible -i /home/ubuntu/ansible-course/Lab_3/my_inventory all -m ping
 ```
 
@@ -90,7 +90,7 @@ preceding, but this time, format it as YAML, you would specify it as
 follows. Create an inventory file in [/etc/ansible/my_inventory.yaml] using the following yaml:
 
 
-```
+```yaml
 ---
 ungrouped:
   hosts:
@@ -110,7 +110,7 @@ ungrouped:
 
 **Note:** You can copy file from lab_3 folder as well.
 
-```
+```bash
 cd ~/Desktop/ansible-course/Lab_3 && cp my_inventory.yaml /etc/ansible/
 ```
 
@@ -135,10 +135,7 @@ the next part of this lab.
 
 
 
-Using host groups
------------------
-
-
+## Using host groups
 
 Let\'s assume you have a simple three-tier web architecture, with
 multiple hosts in each tier for high availability and/or load balancing.
@@ -216,7 +213,7 @@ shows the YAML version of the preceding inventory---the two are
 identical as far as Ansible is concerned, but it is left to you to
 decide which format you prefer working with:
 
-```
+```yaml
 all:
   hosts:
     loadbalancer.example.com:
@@ -242,7 +239,7 @@ all:
 
 **Note:** You can copy inventory file from lab_3 folder as well.
 
-```
+```bash
 cd ~/Desktop/ansible-course/Lab_3 && cp hostgroups-yml /etc/ansible/my_inventory.yaml
 ```
 
@@ -251,8 +248,8 @@ inventory, you would simply reference it either in your playbook or on
 the command line. For example, in the last section we ran, we can use
 the following:
 
-```
-$ ansible -i /etc/ansible/my_inventory.yaml all -m shell -a 'echo hello-yaml' -f 5
+```bash
+ansible -i /etc/ansible/my_inventory.yaml all -m shell -a 'echo hello-yaml' -f 5
 ```
 
 Note the [all] keyword in the middle of that line. That is the
@@ -262,7 +259,7 @@ the same command, but this time on just the [centos] group hosts
 from the previous YAML inventory, we would run this variation of the
 command:
 
-```
+```console
 $ ansible -i hostgroups-yml centos -m shell -a 'echo hello-yaml' -f 5
 
 app01.example.com | CHANGED | rc=0 >>
@@ -333,8 +330,7 @@ variables.
 
 
 
-Adding host and group variables to your inventory
--------------------------------------------------
+## Adding host and group variables to your inventory
 
 
 Let\'s build on our previous three-tier example and suppose that we need
@@ -451,7 +447,7 @@ very valuable.
     [frontends] section would appear as follows (the rest of the
     inventory has been removed to save space):
 
-```
+```yaml
         frontends:
           hosts:
             frt01.example.com:
@@ -493,8 +489,8 @@ $ cd vartree
 6.  Now, under this directory, we\'ll create two more directories for
     the variables:
 
-```
-$ mkdir host_vars group_vars
+```bash
+mkdir host_vars group_vars
 ```
 
 7.  Now, under the [host\_vars] directory, we\'ll create a file
@@ -503,7 +499,7 @@ $ mkdir host_vars group_vars
     is, [frt01.example.com.yml]). This file should contain the
     following:
 
-```
+```yaml
 ---
 https_port: 8444
 ```
@@ -512,7 +508,7 @@ https_port: 8444
     file named after the group to which we want to assign variables
     (that is, [frontends.yml]) with the following contents:
 
-```
+```yaml
 ---
 https_port: 8443
 lb_vip: lb.example.com
@@ -672,8 +668,7 @@ scenario.
 
 
 
-Special host management using patterns
-======================================
+## Special host management using patterns
 
 As a starting point, let\'s consider again an inventory that we defined
 earlier in this lab for the purposes of exploring host groups and
@@ -838,8 +833,7 @@ is hoped that this has given you everything you need to work confidently
 with Ansible inventories.
 
 
-Summary
-=======
+# Summary
 
 
 In this lab, you learned about creating simple static inventory
@@ -852,8 +846,7 @@ In the next lab, we will learn how to develop playbooks and roles to
 configure, deploy, and manage remote machines using Ansible.
 
 
-Questions
-=========
+# Questions
 
 1.  How do you add the [frontends] group variables to your
     inventory?
@@ -888,5 +881,3 @@ A\) True
 
 B\) False
 
-
-c
