@@ -1,10 +1,4 @@
-
-<img align="right" src="./images/logo.png">
-
-
-
-Lab 4. Playbooks and Roles
-===================
+# Lab 4. Playbooks and Roles
 
 
 Specifically, in this lab, we will cover the following topics:
@@ -22,7 +16,7 @@ Specifically, in this lab, we will cover the following topics:
 
 All lab file are present at below path. Run following command in the terminal first before running commands in the lab:
 
-`cd ~/Desktop/ansible-course/Lab_4` 
+`cd ~/ansible-course/Lab_4` 
 
 
 Understanding the playbook framework

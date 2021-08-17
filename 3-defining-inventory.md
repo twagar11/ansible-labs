@@ -14,8 +14,44 @@ All lab file are present at below path. Run following command in the terminal fi
 `cd ~/Desktop/ansible-course/Lab_3` 
 
 
-Creating an inventory file and adding hosts
-===========================================
+
+#### Add machines to `/etc/hosts` file
+
+The labs refer to the following machines:
+ * `target1.example.com`
+ * `target2.example.com`
+ * `target3.example.com`
+
+
+
+If not already present, Add the following lines to the file `/etc/hosts`
+
+```bash
+sudo vi /etc/hosts/
+```
+
+
+```text
+127.0.0.1 target1.example.com
+127.0.0.1 target2.example.com
+127.0.0.1 target3.example.com
+```
+
+Now, confirm this works by attempting to perform an ssh to each of the four machiens
+
+```bash
+ssh 127.0.0.1 # you may have to say yes when asked
+exit
+ssh target1.example.com   # You may have to say "yes" when asked
+exit
+ssh target2.example.com   # You may have to say "yes" when asked
+exit
+ssh target3.example.com   # You may have to say "yes" when asked
+exit
+
+```
+
+## Creating an inventory file and adding hosts
 
 
 Most Ansible installations will look for a default inventory file in
