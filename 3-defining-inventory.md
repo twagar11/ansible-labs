@@ -63,7 +63,7 @@ ungrouped:
       ansible_port: 22
     target2.example.com:
       ansible_port: 22
-      ansible_user: root
+      ansible_user: ubuntu
     target3.example.com:
       ansible_host: 127.0.0.1
       ansible_port: 22
