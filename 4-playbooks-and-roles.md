@@ -59,7 +59,6 @@ health_check_interal=60
 
 
 
-
 Let\'s dive right in and get started writing a playbook. 
 
 1.  Create a simple playbook to run on the hosts in
