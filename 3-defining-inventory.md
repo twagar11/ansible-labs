@@ -340,15 +340,15 @@ special Ansible variables, but instead are variables entirely of our own
 choosing, which we will use later on in the playbooks that run against
 this server. Suppose that these variables are as follows:
 
--   `[https\_port]`, which defines the port that the frontend proxy
+-   `https_port`, which defines the port that the frontend proxy
     should listen on
--   `[lb_vip]`, which defines the FQDN of the load-balancer in
+-   `lb_vip`, which defines the FQDN of the load-balancer in
     front of the frontend servers
 
 Let\'s see how this is done:
 
 1.  We could simply add these to each of the hosts in the
-    `[frontends]` part of our inventory file, just as we did before
+    `frontends` part of our inventory file, just as we did before
     with the Ansible connection variables. In this case, a portion of
     our INI-formatted inventory might look like this:
 
@@ -377,7 +377,7 @@ you have to add the same variables to every single host.
 
 2.  Luckily, you can assign variables to a host group as well as to
     hosts individually. If we edited the preceding inventory to achieve
-    this, the `[frontends]` section would now look like this:
+    this, the `frontends` section would now look like this:
 
 ```
 [frontends]
@@ -647,7 +647,7 @@ frontends
 testvar=group
 ```
 
-Now, let\'s run an ad hoc command to see what value of [testvar]
+Now, let\'s run an ad hoc command to see what value of `testvar`
 is actually set:
 
 ```console
