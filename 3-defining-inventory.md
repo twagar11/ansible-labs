@@ -11,7 +11,7 @@ In this lab, we will cover the following topics:
 
 All lab file are present at below path. Run following command in the terminal first before running commands in the lab:
 
-`cd ~/Desktop/ansible-course/Lab_3` 
+`cd ~/ansible-course/Lab_3` 
 
 
 
@@ -111,7 +111,7 @@ ungrouped:
 **Note:** You can copy file from lab_3 folder as well.
 
 ```bash
-cd ~/Desktop/ansible-course/Lab_3 && cp my_inventory.yaml /etc/ansible/
+cd ~/ansible-course/Lab_3 && cp my_inventory.yaml /etc/ansible/
 ```
 
 Now if you were to run the preceding inventory within Ansible, using a
@@ -240,7 +240,7 @@ all:
 **Note:** You can copy inventory file from lab_3 folder as well.
 
 ```bash
-cd ~/Desktop/ansible-course/Lab_3 && cp hostgroups-yml /etc/ansible/my_inventory.yaml
+cd ~/ansible-course/Lab_3 && cp hostgroups-yml /etc/ansible/my_inventory.yaml
 ```
 
 When you want to work with any of the groups from the preceding
