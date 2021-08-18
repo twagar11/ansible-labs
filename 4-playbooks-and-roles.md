@@ -34,7 +34,7 @@ the playbooks we develop in this lab, we will reuse a variant of an
 inventory created in Lab 3 (unless stated otherwise):
 
 
-```
+```ini
 [frontends]
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
@@ -69,7 +69,7 @@ Let\'s dive right in and get started writing a playbook.
     command line, but as this lab is about playbook development,
     we\'ll ignore that for now):
 
-```
+```yaml
 ---
 - hosts: frontends
   remote_user: ubuntu
@@ -88,7 +88,7 @@ Let\'s dive right in and get started writing a playbook.
     doesn\'t exist). Be careful with the indentation and ensure it
     matches that of the first part of the file:
 
-```
+```yaml
   - name: run a simple command
     shell: /bin/ls -al /nonexistent
     ignore_errors: True
@@ -97,7 +97,7 @@ Let\'s dive right in and get started writing a playbook.
 Let\'s see how our newly created playbook behaves when we run it:
 
 
-```
+```console
 $ ansible-playbook -i hosts myplaybook.yaml
 
 PLAY [frontends] ***************************************************************
@@ -142,7 +142,7 @@ Consider the following playbook:
 Let's change the default Apache port using template as port 80 is already in use by lab environment.
 
 
-```
+```yaml
 ---
 - name: Handler demo 1
   hosts: frt01.example.com
@@ -168,7 +168,7 @@ Let's change the default Apache port using template as port 80 is already in use
 
 You can install apache2 by running `apt-get install -y apache2`. It can also installed by running following playbook:
 
-```
+```console
 $ cd ~/ansible-course/Lab_2
 $ ansible-playbook update-apache-version.yml
 ```
@@ -226,7 +226,7 @@ updated. However, if we run this playbook a second time without making
 any changes to the template or configuration file, we will see something
 like this:
 
-```
+```console
 $ ansible-playbook -i hosts handlers1.yml
 
 PLAY [Handler demo 1] **********************************************************
@@ -246,7 +246,7 @@ also call multiple handlers by setting a common name for using the
 [name] or the [listen] string---as demonstrated in the
 following example:
 
-```
+```yaml
 ---
 - name: Handler demo 1
   hosts: frt01.example.com
@@ -280,7 +280,7 @@ detect whether a change has occurred---as a result, they always return
 the [changed] value, and so, in this demo playbook, the handlers
 will always be notified:
 
-```
+```console
 $ ansible-playbook -i hosts handlers2.yml
 
 PLAY [Handler demo 1] **********************************************************
@@ -305,8 +305,7 @@ section.
 
 
 
-Comparing playbooks and ad hoc tasks
-------------------------------------
+## Comparing playbooks and ad hoc tasks
 
 Let\'s develop a practical example---suppose you want to install Apache. There are a number of steps involved even if the default
 configuration is sufficient (which is unlikely, but for now, we\'ll keep
@@ -316,7 +315,7 @@ ensure the service is running (and runs at boot time).
 
 To perform these commands in the shell, you might do the following:
 
-```
+```console
 $ sudo apt install apache2
 $ sudo service apache2 start
 $ sudo service apache2 status
@@ -331,7 +330,7 @@ interests of space; however, let\'s say you want to restart the Apache
 service---in this case, you could run an ad hoc command similar to the
 following (again, we will perform it only on one host for conciseness):
 
-```
+```console
 $ ansible -i hosts frt01* -m service -a "name=apache2 state=restarted"
 ```
 
@@ -343,7 +342,7 @@ against---the key thing being that the command resulted in the
 service was indeed restarted:
 
 
-```
+```console
 frt01.example.com | CHANGED => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python"
@@ -384,7 +383,7 @@ requirements have been completed by one fairly simple and easy to read
 playbook. There is a new concept here, loops, which we haven\'t covered
 yet, but don\'t worry, we will cover this later in this lab:
 
-```
+```console
 $ ansible-playbook -i hosts installapache.yml
 
 PLAY [Install Apache] **********************************************************
@@ -473,7 +472,7 @@ sequentially, in the order they appear in the playbook. Note the
 presence of the [PLAY] keyword, which denotes the start of each
 play:
 
-```
+```console
 $ ansible-playbook -i hosts playandtask.yml
 
 PLAY [Play 1 - configure the frontend servers] *********************************
@@ -603,7 +602,7 @@ first role:\
     from within your chosen playbook directory---this is as simple as
     this:
 
-```
+```console
 $ mkdir -p roles/installapache/tasks
 ```
 
@@ -694,7 +693,7 @@ With this completed, you can now run your [site.yml] playbook
 using [ansible-playbook] in the normal way---you should see output
 similar to this:
 
-```
+```console
 $ cd ~/ansible-course/Lab_4/role-example1
 $ ansible-playbook -i hosts site.yml
 
@@ -791,7 +790,7 @@ this playbook---nothing else is called from the playbook itself.
     previous role, this will not contain any tasks or even any variable
     data; instead, it will just contain a [meta] directory:
 
-```
+```console
 $ mkdir -p roles/platform/meta
 ```
 
@@ -819,7 +818,7 @@ been passed to it each time it is referred to as a dependency.
 3.  Let\'s now go ahead and create the [linuxtype] role---again,
     this will contain no tasks, but more dependency declarations:
 
-```
+```console
 $ mkdir -p roles/linuxtype/meta/
 ```
 
@@ -840,7 +839,7 @@ on roles called [version] and [network].
 4.  Let\'s create the [version] role first---this will have both
     [meta] and [tasks] directories in it:
 
-```
+```console
 $ mkdir -p roles/version/meta
 $ mkdir -p roles/version/tasks
 ```
@@ -876,7 +875,7 @@ passed to the role:
     keep our example code simple, we\'ll define it with the same
     contents as the [version] role:
 
-```
+```console
 $ mkdir -p roles/network/meta
 $ mkdir -p roles/network/tasks
 ```
@@ -943,7 +942,7 @@ Hence, you could be forgiven for thinking that we\'ll see the
 we originally specified the dependencies in the [platform] role).
 However, when we run it, we actually see this:
 
-```
+```console
 $ ansible-playbook -i hosts site.yml
 
 PLAY [Role variables and meta playbook] ****************************************
@@ -998,7 +997,7 @@ the declaration of [type] is now at a lower indentation level,
 meaning it is a role parameter. Now, when we run the playbook, we get
 the results that we had hoped for:
 
-```
+```console
 $ ansible-playbook -i hosts site.yml
 
 PLAY [Role variables and meta playbook] ****************************************
@@ -1067,7 +1066,7 @@ the time of writing) 106 roles for setting the MOTD. If we want to use
 one of these, we could download it into our roles directory using the
 following command:
 
-```
+```console
 $ ansible-galaxy role install -p roles/ arillso.motd
 ```
 
@@ -1085,7 +1084,7 @@ role directory structure for you to create your own roles in---this
 saves all of the manual directory and file creation we have been
 undertaking in this lab, as in this example:
 
-```
+```console
 $ ansible-galaxy role init --init-path roles/ testrole
 
 - Role testrole was created successfully
@@ -1171,7 +1170,7 @@ example playbook:
 Now, when we run this task, if your test system(s) are Ubuntu-based (and
 mine are), you should see output similar to the following:
 
-```
+```console
 
 $ cd ~/ansible-course/Lab_4
 $ ansible-playbook -i hosts condition.yml
@@ -1224,7 +1223,7 @@ this case, my [app01.example.com] server was based on CentOS 6 so
 had the patch applied. All other systems were skipped because they did
 not match my logical expression:
 
-```
+```console
 $ ansible-playbook -i hosts condition2.yml
 
 PLAY [Play to patch only Ubuntu systems] ***************************************
@@ -1278,7 +1277,7 @@ from the GitHub repository that accompanies this course will contain a
 file named [hosts], then you should see output similar to the
 following:
 
-```
+```console
 $ ansible-playbook condition3.yml
 
 [WARNING]: provided hosts list is empty, only localhost is available. Note that
@@ -1303,7 +1302,7 @@ localhost : ok=3 changed=1 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
 
 Yet, if the file doesn\'t exist, then you\'ll see that the [debug] message gets skipped:
 
-```
+```console
 $ ansible-playbook condition3.yml
 
 
@@ -1425,7 +1424,7 @@ When working with the loop data, we use a special variable called
 to be echoed. Hence, if we run this playbook, we should see output
 similar to the following:
 
-```
+```console
 $ ansible-playbook -i hosts loop1.yml
 
 
@@ -1471,7 +1470,7 @@ data. For example, consider the following iteration of the playbook:
 Now, when we run this, we see that the task is skipped until we reach
 the integer value of 4 and higher in the loop contents:
 
-```
+```console
 $ ansible-playbook -i hosts loop2.yml
 
 PLAY [Simple loop demo play] ***************************************************
@@ -1532,7 +1531,7 @@ the dictionary with the contents of [loopresult]. The following
 output is truncated in the interests of space but demonstrates the kind
 of results you should expect from running this playbook:
 
-```
+```console
 $ ansible-playbook -i hosts loop3.yml
 
 PLAY [Simple loop demo play] ***************************************************
@@ -1624,7 +1623,7 @@ iterate over the outer loop first and then process the inner loop over
 the data defined by the outer loop. As the loop variable names do not
 clash, all works exactly as we would expect:
 
-```
+```console
 $ ansible-playbook loopmain.yml
 
 
@@ -1767,7 +1766,7 @@ you should see that either all three tasks are run or are
 skipped---depending on the makeup and contents of your inventory, it
 might look something like this:
 
-```
+```console
 $ ansible-playbook -i hosts blocks.yml
 
 PLAY [Conditional block play] **************************************************
@@ -1858,7 +1857,7 @@ With this flow of execution in mind, you should see output similar to
 the following when you execute this playbook, noting that we have
 deliberately created two error conditions to demonstrate the flow:
 
-```
+```console
 $ ansible-playbook -i hosts blocks-error.yml
 
 PLAY [Play to demonstrate block error handling] ********************************
@@ -1940,7 +1939,7 @@ deliberate error it contains. The start of the output should be similar
 to the following:
 
 
-```
+```console
 $ ansible-playbook -i hosts debug.yml
 
 PLAY [Play to demonstrate the debug strategy] **********************************
@@ -2033,7 +2032,7 @@ Let\'s use a simple playbook from GitHub that sets the message of the
 day based on variable content. To do this, we will run the following
 command (which we\'ll break down in a minute):
 
-```
+```console
 $ ansible-pull -d /var/ansible-set-motd -i ${HOSTNAME}, -U https://github.com/fenago/ansible-set-motd.git site.yml -e "ag_motd_content='MOTD generated by ansible-pull'" >> /tmp/ansible-pull.log 2>&1
 ```
 
@@ -2042,7 +2041,7 @@ When you run this command, you should see some output similar to the
 following (note that log redirection has been removed to make it easier
 to see the output):
 
-```
+```console
 $ ansible-pull -d /var/ansible-set-motd -i ${HOSTNAME}, -U https://github.com/fenago/ansible-set-motd.git site.yml -e "ag_motd_content='MOTD generated by ansible-pull'"
 
 
