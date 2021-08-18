@@ -221,9 +221,6 @@ and navigate to `http://localhost:81`
 
  
 
-Open http://localhost:81 in Mirdori browser to verify that apache is running now.
-
-
 Notice how the handler was run at the end, as the configuration file was
 updated. However, if we run this playbook a second time without making
 any changes to the template or configuration file, we will see something
