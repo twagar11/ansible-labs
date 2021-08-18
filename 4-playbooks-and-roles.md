@@ -194,6 +194,33 @@ frt01.example.com : ok=2 changed=2 unreachable=0 failed=0 skipped=0 rescued=0 ig
 
 ### ProTip
 
+You cna verify that apache is running in one of two ways:
+
+1. we can use curl as follows:
+
+```console
+
+$ curl localhost:81  # for running on port 81
+
+<!doctype html>
+<html class="no-js" lang="en_US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Training Sandbox</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+....
+
+
+```
+
+2. You also can use VNC on your machine (if that is available), and then open the web browser provided
+and navigate to `http://localhost:81`
+
+ 
+
 Open http://localhost:81 in Mirdori browser to verify that apache is running now.
 
 

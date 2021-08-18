@@ -69,8 +69,12 @@ In this lab, we will provide some examples of both INI and YAML
 formatted inventory files. Let\'s start by creating a static inventory file. This inventory file
 will be separate from the default inventory.
 
-Create an inventory file in `/etc/ansible/my\_inventory` using the
+As sudo, Create an inventory file in `/etc/ansible/my_inventory` using the
 following INI-formatted code:
+
+```console
+$ sudo vi /etc/ansible/my_inventory
+```
 
 ```
 target1.example.com ansible_host=127.0.0.1 ansible_port=22
@@ -111,7 +115,8 @@ ungrouped:
 **Note:** You can copy file from lab_3 folder as well.
 
 ```bash
-cd ~/ansible-course/Lab_3 && cp my_inventory.yaml /etc/ansible/
+cd ~/ansible-course/Lab_3 
+sudo cp my_inventory.yaml /etc/ansible/
 ```
 
 Now if you were to run the preceding inventory within Ansible, using a
