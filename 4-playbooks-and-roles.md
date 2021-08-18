@@ -2026,6 +2026,15 @@ Using ansible-pull
 ==================
 . 
 
+To prepare for this step, we need to makes rue that the path `/var/ansible-set-motd` exists and has permissions
+
+```bash
+sudo mkdir /var/ansible-set-motd
+sudo chown $USER /var/ansible-set-motd
+```
+
+
+
 
 
 Let\'s use a simple playbook from GitHub that sets the message of the
