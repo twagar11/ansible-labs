@@ -4,12 +4,12 @@
 Specifically, in this lab, we will cover the following topics:
 
 -   Understanding the playbook framework
--   Understanding roles---the playbook organizer
+-   Understanding roles -- the playbook organizer
 -   Using conditions in your code
 -   Repeating tasks with loops
 -   Grouping tasks using blocks
 -   Configuring play execution via strategies
--   Using [ansible-pull]
+-   Using `ansible-pull`
 
 
 #### Lab Environment
@@ -26,7 +26,7 @@ Understanding the playbook framework
 Although YAML format is easy to read and write, it is very pedantic when
 it comes to spacing. For example, you cannot use tabs to set indentation
 even though on the screen a tab and four spaces might look
-identical---in YAML, they are not. We recommend that you adopt an editor
+identical -- in YAML, they are not. We recommend that you adopt an editor
 with YAML support to aid you in writing your playbooks if you are doing
 this for the first time, perhaps Vim, Visual Studio Code, or Eclipse, as
 these will help you to ensure that your indentation is correct. To test
@@ -35,7 +35,7 @@ inventory created in Lab 3 (unless stated otherwise):
 
 
 ```ini
-[frontends]
+`frontends`
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
@@ -62,15 +62,15 @@ health_check_interal=60
 Let\'s dive right in and get started writing a playbook. 
 
 1.  Create a simple playbook to run on the hosts in
-    the [frontends] host group defined in our inventory file. We
+    the `frontends` host group defined in our inventory file. We
     can set the user that will access the hosts using the
-    [remote\_user] directive in the playbook as demonstrated in
-    the following (you can also use the [\--user] switch on the
+    `remote_user` directive in the playbook as demonstrated in
+    the following (you can also use the `--user` switch on the
     command line, but as this lab is about playbook development,
     we\'ll ignore that for now):
 
 ```yaml
----
+ -- 
 - hosts: frontends
   remote_user: ubuntu
 
@@ -80,10 +80,10 @@ Let\'s dive right in and get started writing a playbook.
     remote_user: ubuntu
 ```
 
-2.  Add another task below the first to run the [shell] module
-    (that will, in turn, run the [ls] command on the remote
-    hosts). We\'ll also add the [ignore\_errors] directive to this
-    task to ensure that our playbook doesn\'t fail if the [ls]
+2.  Add another task below the first to run the `shell` module
+    (that will, in turn, run the `ls` command on the remote
+    hosts). We\'ll also add the `ignore_errors` directive to this
+    task to ensure that our playbook doesn\'t fail if the `ls`
     command fails (for example, if the directory we\'re trying to list
     doesn\'t exist). Be careful with the indentation and ensure it
     matches that of the first part of the file:
@@ -100,7 +100,7 @@ Let\'s see how our newly created playbook behaves when we run it:
 ```console
 $ ansible-playbook -i hosts myplaybook.yaml
 
-PLAY [frontends] ***************************************************************
+PLAY `frontends` ***************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [frt02.example.com]
@@ -123,14 +123,14 @@ frt02.example.com : ok=3 changed=1 unreachable=0 failed=0 skipped=0 rescued=0 ig
 
 From the output of the playbook run, you can see that our two tasks were
 executed in the order in which they were specified. We can see that the
-[ls] command failed because we tried to list a directory that did
-not exist, but the playbook did not register any [failed] tasks
-because we set [ignore\_errors] to [true] for this task (and
+`ls` command failed because we tried to list a directory that did
+not exist, but the playbook did not register any `failed` tasks
+because we set `ignore_errors` to `true` for this task (and
 only this task).
 
 
 A handler is a special type of task that is run as a result of a
-[notify]. However, unlike Ansible playbook tasks, which are
+`notify`. However, unlike Ansible playbook tasks, which are
 performed in sequence, handlers are all grouped together and run at the
 very end of the play. Also, they can be notified more than once but will
 only be run once regardless, again preventing needless service restarts.
@@ -143,7 +143,7 @@ Let's change the default Apache port using template as port 80 is already in use
 
 
 ```yaml
----
+ -- 
 - name: Handler demo 1
   hosts: frt01.example.com
   gather_facts: no
@@ -242,12 +242,12 @@ This time, the handler was not called as the result from the
 configuration task as OK. All handlers should have a globally unique
 name so that the notify action can call the correct handler. You could
 also call multiple handlers by setting a common name for using the
-[listen] directive---this way, you can call either the handler
-[name] or the [listen] string---as demonstrated in the
+`listen` directive -- this way, you can call either the handler
+`name` or the `listen` string -- as demonstrated in the
 following example:
 
 ```yaml
----
+ -- 
 - name: Handler demo 1
   hosts: frt01.example.com
   gather_facts: no
@@ -274,10 +274,10 @@ following example:
 
 
 We only have one task in the playbook, but when we run it, both handlers
-are called. Also, remember that we said earlier that [command] was
+are called. Also, remember that we said earlier that `command` was
 among a set of modules that were a special case because they can\'t
-detect whether a change has occurred---as a result, they always return
-the [changed] value, and so, in this demo playbook, the handlers
+detect whether a change has occurred -- as a result, they always return
+the `changed` value, and so, in this demo playbook, the handlers
 will always be notified:
 
 ```console
@@ -307,7 +307,7 @@ section.
 
 ## Comparing playbooks and ad hoc tasks
 
-Let\'s develop a practical example---suppose you want to install Apache. There are a number of steps involved even if the default
+Let\'s develop a practical example -- suppose you want to install Apache. There are a number of steps involved even if the default
 configuration is sufficient (which is unlikely, but for now, we\'ll keep
 the example simple). If you were to perform the basic installation by
 hand, you would need to install the package, open up the firewall, and
@@ -327,7 +327,7 @@ $ sudo service apache2 status
 Now, for each of these commands, there is an equivalent ad hoc Ansible
 command that you could run. We won\'t go through all of them here in the
 interests of space; however, let\'s say you want to restart the Apache
-service---in this case, you could run an ad hoc command similar to the
+service -- in this case, you could run an ad hoc command similar to the
 following (again, we will perform it only on one host for conciseness):
 
 ```console
@@ -337,8 +337,8 @@ $ ansible -i hosts frt01* -m service -a "name=apache2 state=restarted"
 When run successfully, you will see pages of shell output containing all
 of the variable data returned from running the service module in this
 way. A snippet of this is shown in the following for you to check yours
-against---the key thing being that the command resulted in the
-[changed] status, meaning that it ran successfully and that the
+against -- the key thing being that the command resulted in the
+`changed` status, meaning that it ran successfully and that the
 service was indeed restarted:
 
 
@@ -354,13 +354,13 @@ frt01.example.com | CHANGED => {
 
 
 
-A playbook is a far more valuable way to approach this---not only
+A playbook is a far more valuable way to approach this -- not only
 will it perform all of the steps in one go, but it will also give you a
 record of how it was done for you to refer to later on. There are
 multiple ways to do this, but consider the following as an example:
 
 ```
----
+ -- 
 - name: Install Apache
   hosts: frt01.example.com
   gather_facts: no
@@ -409,7 +409,7 @@ meanings: **plays** and **tasks**.
 
 
 Defining plays and tasks
-------------------------
+ --  --  --  --  --  --  --  -- 
 
 Suppose we want to write a single playbook to configure both the frontend
 servers and the application servers. We could use two separate playbooks
@@ -428,7 +428,7 @@ started with building up our playbook:
     set up the Apache server on the front end, as shown here:
 
 ```
----
+ -- 
 - name: Play 1 - configure the frontend servers
   hosts: frontends
   become: yes
@@ -464,7 +464,7 @@ started with building up our playbook:
 ```
 
 Now, you have two plays: one to install web servers in the
-[frontends] group and one to install application servers in the
+`frontends` group and one to install application servers in the
 [apps] group, all combined into one simple playbook.
 
 When we run this playbook, we\'ll see the two plays performed
@@ -510,11 +510,11 @@ frt01.example.com : ok=3 changed=2 unreachable=0 failed=0 skipped=0 rescued=0 ig
 frt02.example.com : ok=3 changed=2 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
 ```
 
-There we have it---one playbook, yet two distinct plays operating on
+There we have it -- one playbook, yet two distinct plays operating on
 different sets of hosts from the provided inventories. This is very
 powerful, especially when combined with roles (which will be covered
 later in this course). Of course, you can have just one play in your
-playbook---you don\'t have to have multiple ones, but it is important to
+playbook -- you don\'t have to have multiple ones, but it is important to
 be able to develop multi-play playbooks as you will almost certainly
 find them useful as your environment gets more complex.
 
@@ -524,18 +524,18 @@ Understanding roles -- the playbook organizer
 =============================================
 
 
-The process of creating roles is in fact very simple---Ansible will (by
+The process of creating roles is in fact very simple -- Ansible will (by
 default) look within the same directory as you are running your playbook
 from for a [roles/] directory, and in here, you will create one
 subdirectory for each role. The role name is derived from the
-subdirectory name---there is no need to create complex metadata or
-anything else---it really is that simple. Within each subdirectory goes
+subdirectory name -- there is no need to create complex metadata or
+anything else -- it really is that simple. Within each subdirectory goes
 a fixed directory structure that tells Ansible what the tasks, default
 variables, handlers, and so on are for each role.
 
 
 The [roles/] directory is not the only play Ansible will look for
-roles---this is the first directory it will look in, but it will then
+roles -- this is the first directory it will look in, but it will then
 look in [/etc/ansible/roles] for any additional roles. This can be
 further customized through the Ansible configuration file.
 
@@ -565,7 +565,7 @@ need an inventory, so let\'s reuse the inventory we used in the previous
 section (included in the following for convenience):
 
 ```
-[frontends]
+`frontends`
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
@@ -599,7 +599,7 @@ will be to people. Step through the following process to create your
 first role:\
 
 1.  Create the directory structure for the [installapache] role
-    from within your chosen playbook directory---this is as simple as
+    from within your chosen playbook directory -- this is as simple as
     this:
 
 ```console
@@ -608,14 +608,14 @@ $ mkdir -p roles/installapache/tasks
 
 2.  Now, let\'s create the mandatory [main.yml] inside the
     [tasks] directory we just created. This won\'t actually
-    perform the Apache installation---rather, it will call one of two
+    perform the Apache installation -- rather, it will call one of two
     external tasks files, depending on the operating system detected on
     the target host during the fact-gathering stage. We can use this
     special variable,  [ansible\_distribution], in a [when]
     condition to determine which of the tasks files to import:
 
 ```
----
+ -- 
 - name: import a tasks based on OS platform 
   import_tasks: centos.yml 
   when: ansible_distribution == 'CentOS' 
@@ -629,7 +629,7 @@ $ mkdir -p roles/installapache/tasks
     content:
 
 ```
----
+ -- 
 - name: Install Apache using apt
   apt:
     name: "apache2"
@@ -646,7 +646,7 @@ $ mkdir -p roles/installapache/tasks
     Notice how the content differs between CentOS and Ubuntu hosts:
 
 ```
----
+ -- 
 - name: Install Apache using apt
   apt:
     name: "apache2"
@@ -658,7 +658,7 @@ $ mkdir -p roles/installapache/tasks
 ```
 
 
-Now, roles don\'t run by themselves---we have to create a playbook to
+Now, roles don\'t run by themselves -- we have to create a playbook to
 call them, so let\'s write a simple playbook to call our newly created
 role. This has a play definition just like we saw before, but then
 rather than having a [tasks:] section within the play, we have a
@@ -667,7 +667,7 @@ dictates that this file be called [site.yml], but you are free to
 call it whatever you like:
 
 ```
----
+ -- 
 - name: Install Apache using a role
   hosts: frontends
   become: true
@@ -690,7 +690,7 @@ For clarity, your final directory structure should look like this:
 ```
 
 With this completed, you can now run your [site.yml] playbook
-using [ansible-playbook] in the normal way---you should see output
+using [ansible-playbook] in the normal way -- you should see output
 similar to this:
 
 ```console
@@ -739,7 +739,7 @@ playbook. The roles directory structure including both the
 similar manner as in the preceding example:
 
 ```
---- 
+ --  
 - name: Play to import and include a role
   hosts: frontends
   
@@ -753,7 +753,7 @@ similar manner as in the preceding example:
 
 
 Setting up role-based variables and dependencies
-------------------------------------------------
+ --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- 
 
 
 Roles based variables can go in one of two locations:
@@ -775,7 +775,7 @@ We shall see examples of both of these as we build our example:
     contains the following code:
 
 ```
----
+ -- 
 - name: Role variables and meta playbook
   hosts: frt01.example.com
 
@@ -783,10 +783,10 @@ We shall see examples of both of these as we build our example:
     - platform
 ```
 
-Notice that we are simply calling one role called [platform] from
-this playbook---nothing else is called from the playbook itself.
+Notice that we are simply calling one role called `platform` from
+this playbook -- nothing else is called from the playbook itself.
 
-2.  Let\'s go ahead and create the [platform] role---unlike our
+2.  Let\'s go ahead and create the `platform` role -- unlike our
     previous role, this will not contain any tasks or even any variable
     data; instead, it will just contain a [meta] directory:
 
@@ -798,7 +798,7 @@ Inside this directory, create a file called [main.yml] with the
 following contents:
 
 ```
----
+ -- 
 dependencies:
 - role: linuxtype
   vars:
@@ -809,13 +809,13 @@ dependencies:
 ```
 
 This code will tell Ansible that the platform role is dependent on the
-[linuxtype] role. Notice that we are specifying the dependency
+`linuxtype` role. Notice that we are specifying the dependency
 twice, but each type we specify it, we are passing it a variable called
-[type] with a different value---in this way, the Ansible parser
+`type` with a different value -- in this way, the Ansible parser
 allows us to call the role twice because a different variable value has
 been passed to it each time it is referred to as a dependency.
 
-3.  Let\'s now go ahead and create the [linuxtype] role---again,
+3.  Let\'s now go ahead and create the `linuxtype` role -- again,
     this will contain no tasks, but more dependency declarations:
 
 ```console
@@ -826,17 +826,17 @@ Again, create a [main.yml] file in the [meta] directory, but
 this time containing the following:
 
 ```
----
+ -- 
 dependencies:
 - role: version
 - role: network
 ```
 
-Once again, we are creating more dependencies---this time, when the
-[linuxtype] role is called, it, in turn, is declaring dependencies
-on roles called [version] and [network].
+Once again, we are creating more dependencies -- this time, when the
+`linuxtype` role is called, it, in turn, is declaring dependencies
+on roles called `version` and `network`.
 
-4.  Let\'s create the [version] role first---this will have both
+4.  Let\'s create the `version` role first -- this will have both
     [meta] and [tasks] directories in it:
 
 ```console
@@ -848,32 +848,32 @@ In the [meta] directory, we\'ll create a [main.yml] file
 with the following contents:
 
 ```
----
+ -- 
 allow_duplicates: true
 ```
 
-This declaration is important in this example---as discussed earlier,
+This declaration is important in this example -- as discussed earlier,
 normally Ansible will only allow a role to be executed once, even if it
 is called multiple times. Setting [allow\_duplicates] to
 [true] tells Ansible to allow the execution of the role more than
-once. This is required because, in the [platform] role, we call
-(via a dependency) the [linuxtype] role twice, which means, in
-turn, we will call the [version] role twice.
+once. This is required because, in the `platform` role, we call
+(via a dependency) the `linuxtype` role twice, which means, in
+turn, we will call the `version` role twice.
 
 We\'ll also create a simple [main.yml] file in the tasks
-directory, which prints the value of the [type] variable that gets
+directory, which prints the value of the `type` variable that gets
 passed to the role:
 
 ```
----
+ -- 
 - name: Print type variable
   debug:
     var: type
 ```
 
-5.  We will now repeat the process with the [network] role---to
+5.  We will now repeat the process with the `network` role -- to
     keep our example code simple, we\'ll define it with the same
-    contents as the [version] role:
+    contents as the `version` role:
 
 ```console
 $ mkdir -p roles/network/meta
@@ -884,16 +884,16 @@ In the [meta] directory, we\'ll again create
 a [main.yml] file with the following contents:
 
 ```
----
+ -- 
 allow_duplicates: true
 ```
 
 Again, we\'ll create a simple [main.yml] file in the [tasks]
-directory, which prints the value of the [type] variable that gets
+directory, which prints the value of the `type` variable that gets
 passed to the role:
 
 ```
----
+ -- 
 - name: Print type variable
   debug:
     var: type
@@ -930,16 +930,16 @@ this:
 Let\'s see what happens when we run this playbook. Now, you might think
 that the playbook is going to run like this: with the dependency
 structure we created in the preceding code, our initial playbook
-statically imports the [platform] role. The [platform] role
-then states that it depends upon the [linuxtype] role, and the
+statically imports the `platform` role. The `platform` role
+then states that it depends upon the `linuxtype` role, and the
 dependency is declared twice with a different value in a variable called
-[type] each time. The [linuxtype] role then states that it
-depends upon both the [network] and [version] roles, which
-are allowed to run more than once and print the value of [type].
+`type` each time. The `linuxtype` role then states that it
+depends upon both the `network` and `version` roles, which
+are allowed to run more than once and print the value of `type`.
 Hence, you could be forgiven for thinking that we\'ll see the
-[network] and [version] roles called twice, printing
-[centos] once and [ubuntu] the second time (as this is how
-we originally specified the dependencies in the [platform] role).
+`network` and `version` roles called twice, printing
+`centos` once and `ubuntu` the second time (as this is how
+we originally specified the dependencies in the `platform` role).
 However, when we run it, we actually see this:
 
 ```console
@@ -976,15 +976,15 @@ frt01.example.com : ok=5 changed=0 unreachable=0 failed=0 skipped=0 rescued=0 ig
 
 If we are to continue using statically
 imported roles, then we should not use role variables when we declare
-the dependencies. Instead, we should pass over [type] as a role
-parameter. This is a small but crucial difference---role parameters
+the dependencies. Instead, we should pass over `type` as a role
+parameter. This is a small but crucial difference -- role parameters
 remain scoped at the role level even when the Ansible parser is run,
 hence we can declare our dependency twice without the variable getting
 overwritten. To do this, change the contents of
 the [roles/platform/meta/main.yml] file to the following:
 
 ```
----
+ -- 
 dependencies:
 - role: linuxtype
   type: centos
@@ -993,7 +993,7 @@ dependencies:
 ```
 
 Do you notice the subtle change? The [vars:] keyword has gone, and
-the declaration of [type] is now at a lower indentation level,
+the declaration of `type` is now at a lower indentation level,
 meaning it is a role parameter. Now, when we run the playbook, we get
 the results that we had hoped for:
 
@@ -1040,12 +1040,12 @@ development. 
 
 Having look in great detail at a number of aspects of roles, let\'s take
 a look in the following section at a centralized store for publicly
-available Ansible roles --- Ansible Galaxy.
+available Ansible roles  --  Ansible Galaxy.
 
 
 
 Ansible Galaxy
---------------
+ --  --  --  -- --
 
 No section on Ansible roles would be complete without a mention of
 Ansible Galaxy. Ansible Galaxy is a community-driven collection of
@@ -1060,7 +1060,7 @@ In addition to the web site, the [ansible-galaxy] client is
 included in Ansible, and this provides a quick and convenient way for
 you to download and deploy roles into your playbook structure. Let\'s
 say that you want to update the **message of the day** (**MOTD**) on
-your target hosts---this is surely something that somebody has already
+your target hosts -- this is surely something that somebody has already
 figured out. A quick search on the Ansible Galaxy website returns (at
 the time of writing) 106 roles for setting the MOTD. If we want to use
 one of these, we could download it into our roles directory using the
@@ -1070,7 +1070,7 @@ following command:
 $ ansible-galaxy role install -p roles/ arillso.motd
 ```
 
-That\'s all you need to do---once the download is complete, you can
+That\'s all you need to do -- once the download is complete, you can
 import or include the role in your playbook just as you would for the
 manually created roles we have discussed in this lab. Note that if
 you don\'t specify [-p roles/], [ansible-galaxy] installs
@@ -1080,7 +1080,7 @@ you want the role downloaded directly into your playbook directory
 structure, you would add this parameter.
 
 Another neat trick is to use [ansible-galaxy] to create an empty
-role directory structure for you to create your own roles in---this
+role directory structure for you to create your own roles in -- this
 saves all of the manual directory and file creation we have been
 undertaking in this lab, as in this example:
 
@@ -1126,7 +1126,7 @@ As ever, we\'ll need an inventory to get started, and we\'ll reuse the
 inventory we have used throughout this lab:
 
 ```
-[frontends]
+`frontends`
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
@@ -1154,7 +1154,7 @@ Let\'s define the task that will perform our update but add a
 example playbook:
 
 ```
----
+ -- 
 - name: Play to patch only CentOS systems
   hosts: all
   become: true
@@ -1198,13 +1198,13 @@ frt02.example.com : ok=2 changed=0 unreachable=0 failed=0 skipped=0 rescued=0 ig
 
 The preceding output shows that all of our systems were Ubuntu-based,
 but that only [frt01.example.com] needed the patch applying. Now
-we can make our logic more precise---perhaps it is only our legacy
+we can make our logic more precise -- perhaps it is only our legacy
 systems that need the patch applying. In
 this case, we can expand the logic in our playbook to check both the
 distribution and major version, as follows:
 
 ```
----
+ -- 
 - name: Play to patch only Ubuntu systems
   hosts: all
   become: true
@@ -1256,7 +1256,7 @@ only on the condition that the [hosts] string is in the output of
 the [shell] command:
 
 ```
----
+ -- 
 - name: Play to patch only CentOS systems
   hosts: localhost
   become: true
@@ -1355,7 +1355,7 @@ Oftentimes, we will want to perform a single task, but use that single
 task to iterate over a set of data. For example, you might not want to
 create one user account but 10. Or you might want to install 15 packages
 to a system. The possibilities are endless, but the point remains the
-same---you would not want to write 10 individual Ansible tasks to create
+same -- you would not want to write 10 individual Ansible tasks to create
 10 user accounts. Fortunately, Ansible supports looping over datasets to
 ensure that you can perform large scale operations using tightly defined
 code. In this section, we will explore how to make practical use of
@@ -1366,7 +1366,7 @@ use our by-now familiar inventory, which we have consistently used
 throughout this lab:
 
 ```
-[frontends]
+`frontends`
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
@@ -1392,15 +1392,15 @@ Let\'s start with a really simple playbook to show you how to loop over
 a set of data in a single task. Although this is quite a contrived
 example, it is intended to be simple to show you the fundamentals of how
 loops work in Ansible. We will define a single task that runs the
-[command] module on a single host from the inventory and uses the
-[command] module to [echo] the numbers 1 through 6 in turn
+`command` module on a single host from the inventory and uses the
+`command` module to [echo] the numbers 1 through 6 in turn
 on the remote system (with some imagination, this could easily be
 extended to adding user accounts or creating a sequence of files).
 
 Consider the following code:
 
 ```
----
+ -- 
 - name: Simple loop demo play
   hosts: frt01.example.com
 
@@ -1450,7 +1450,7 @@ section with loops, to make the loop operate on just a subset of its
 data. For example, consider the following iteration of the playbook:
 
 ```
----
+ -- 
 - name: Simple loop demo play
   hosts: frt01.example.com
 
@@ -1502,7 +1502,7 @@ Hence, let\'s see what happens if we further enhance the playbook, as
 follows:
 
 ```
----
+ -- 
 - name: Simple loop demo play
   hosts: frt01.example.com
 
@@ -1585,7 +1585,7 @@ intending to use this playbook in a nested loop, we\'ll use the
 contents variable from [item] to [second\_item]:
 
 ```
----
+ -- 
 - name: Play to demonstrate nested loops
   hosts: localhost
 
@@ -1604,11 +1604,11 @@ Then, we\'ll create a second file called [loopsubtask.yml], which
 contains the inner loop and is included in the preceding playbook. As
 we\'re already changed the loop item variable name in the outer loop, we
 don\'t need to change it again here. Note that the structure of this
-file is very much like a tasks file in a role---it is not a complete
+file is very much like a tasks file in a role -- it is not a complete
 playbook, but rather simply a list of tasks:
 
 ```
----
+ -- 
 - name: Inner loop
   debug:
     msg: "second item={{ second_item }} first item={{ item }}"
@@ -1678,7 +1678,7 @@ localhost : ok=7 changed=0 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
 Loops are simple to work with, and yet very powerful as they allow you
 to easily use one task to iterate over a large set of data. In the next
 section, we\'ll look at another construct of the Ansible language for
-controlling playbook flow---blocks.
+controlling playbook flow -- blocks.
 
 
 Grouping tasks using blocks
@@ -1688,7 +1688,7 @@ Blocks in Ansible allow you to logically group a set of tasks together,
 primarily for one of two purposes. One might be to apply conditional
 logic to an entire set of tasks; in this example, you could apply an
 identical when clause to each of the tasks, but this is cumbersome and
-inefficient---far better to place all of the tasks in a block and apply
+inefficient -- far better to place all of the tasks in a block and apply
 the conditional logic to the block itself. In this way, the logic only
 needs to be declared once. Blocks are also valuable when it comes to
 error handling and especially when it comes to recovering from an error
@@ -1698,7 +1698,7 @@ examples in this lab to get you up to speed with blocks in Ansible.
 As ever, let\'s ensure we have an inventory to work from:
 
 ```
-[frontends]
+`frontends`
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
@@ -1736,7 +1736,7 @@ discussed contained in a block (notice the additional level of
 indentation required to denote their presence in the block):
 
 ```
----
+ -- 
 - name: Conditional block play
   hosts: all
   become: true
@@ -1763,7 +1763,7 @@ indentation required to denote their presence in the block):
 When you run this playbook, you should find that the Apache-related
 tasks are only run on any Fedora hosts you might have in your inventory;
 you should see that either all three tasks are run or are
-skipped---depending on the makeup and contents of your inventory, it
+skipped -- depending on the makeup and contents of your inventory, it
 might look something like this:
 
 ```console
@@ -1817,7 +1817,7 @@ playbook.
 Let\'s create a new playbook, this time with the following contents:
 
 ```
----
+ -- 
 - name: Play to demonstrate block error handling
   hosts: frontends
 
@@ -1848,7 +1848,7 @@ Let\'s create a new playbook, this time with the following contents:
 ```
 
 Notice that in the preceding play, we now have additional sections to
-[block] --- as well as the tasks in [block] itself, we have
+[block]  --  as well as the tasks in [block] itself, we have
 two new parts labeled [rescue] and [always]. The flow of
 execution is as follows:
 
@@ -1919,7 +1919,7 @@ debug] and [debugger: on\_failed] statements in the play
 definition:
 
 ```
----
+ -- 
 - name: Play to demonstrate the debug strategy
   hosts: frt01.example.com
   strategy: debug
@@ -1964,7 +1964,7 @@ $
 
 
 To take you through a very simple, practical debugging example, however,
-enter the [p task] command at the prompt---this will cause the
+enter the [p task] command at the prompt -- this will cause the
 Ansible debugger to print the name of the failing task; this is very
 useful if you are in the midst of a large playbook:
 
@@ -1984,7 +1984,7 @@ arguments that were passed to the module in the task:
 
 So, we can see that our module was passed the argument called
 [data], with the argument value being a variable (denoted by the
-pairs of curly braces) called [mobile]. Hence, it might be logical
+pairs of curly braces) called `mobile`. Hence, it might be logical
 to have a look at the variables available to the task, to see whether
 this variable exists, and if so whether the value is sensible (use the
 [p task\_vars] command to do this):
@@ -2001,10 +2001,10 @@ this variable exists, and if so whether the value is sensible (use the
 ```
 
 The preceding output is truncated, and you will find a great many
-variables associated with the task---this is because any gathered facts,
+variables associated with the task -- this is because any gathered facts,
 and internal Ansible variables, are all available to the task. However,
 if you scroll through the list, you will be able to confirm that there
-is no variable called [mobile].
+is no variable called `mobile`.
 
 Hence, this should be enough information to fix your playbook. Enter
 [q] to quit the debugger:
@@ -2018,7 +2018,7 @@ $
 The Ansible debugger is an incredibly powerful tool and you should learn
 to make effective use of it, especially as your playbook complexity
 grows. This concludes our practical look at the various aspects of
-playbook design---in the next section, we\'ll take a look at the ways in
+playbook design -- in the next section, we\'ll take a look at the ways in
 which you can integrate Git source code management into your playbooks.
 
 
@@ -2101,11 +2101,11 @@ This command can be a very powerful part of your overall Ansible
 solution, especially as it means you don\'t have to worry too greatly
 about running all of your playbooks centrally, or ensuring that they are
 all up to date every time you run them. The ability to schedule this in
-[cron] is especially powerful in a large infrastructure where,
+`cron` is especially powerful in a large infrastructure where,
 ideally, automation means things should take care of themselves.
 
 This concludes our practical look at playbooks and how to author your
-own code---with a little research into Ansible modules, you should now
+own code -- with a little research into Ansible modules, you should now
 have enough to write your own robust playbooks with ease.
 
 
@@ -2132,21 +2132,21 @@ contribute back to the community.
 Questions
 =========
 
-1.  How do you restart the Apache web server in the [frontends]
+1.  How do you restart the Apache web server in the `frontends`
     host group via an ad hoc command?
 
-A\) [ansible frontends -i hosts -a \"name=apache2 state=restarted\"]
+A\) `ansible frontends -i hosts -a \"name=apache2 state=restarted\"`
 
-B\) [ansible frontends -i hosts -b service -a \"name=apache2
-state=restarted\"]
+B\) `ansible frontends -i hosts -b service -a \"name=apache2
+state=restarted\"`
 
-C\) [ansible frontends -i hosts -b -m service -a \"name=apache2
-state=restarted\"]
+C\) `ansible frontends -i hosts -b -m service -a \"name=apache2
+state=restarted\"`
 
-D\) [ansible frontends -i hosts -b -m server -a \"name=apache2
-state=restarted\"]
+D\) `ansible frontends -i hosts -b -m server -a \"name=apache2
+state=restarted\"`
 
-E\) [ansible frontends -i hosts -m restart -a \"name=apache2\"]
+E\) `ansible frontends -i hosts -m restart -a \"name=apache2\"`
 
 2.  Do blocks allow you to logically make a group of tasks, or perform
     error handling?
