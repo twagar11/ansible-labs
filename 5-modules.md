@@ -704,6 +704,14 @@ meaningful back to the user rather than using a traceback.
 
 
 
+When done, you can deactivate the venv `moduledev`
+
+```console
+(moduledev) $ deactivate
+```
+
+
+
 Testing and documenting your module
 -----------------------------------
 
@@ -743,6 +751,12 @@ $ . venv/bin/activate
 Running sanity test 'validate-modules' with Python 3.8
 ```
 
+
+When done, you can deactivate the venv
+
+```console
+(venv) $ deactivate
+```
 
 Now that we have passed the sanity checks with [ansible-test],
 let\'s see whether the documentation looks right by using the
