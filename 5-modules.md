@@ -719,6 +719,7 @@ Let\'s get started:
 **Close all terminals and open new terminal**
 
 ```
+$ pip install virtualenv
 $ cd ~/ansible
 $ python3 -m venv venv
 $ . venv/bin/activate
