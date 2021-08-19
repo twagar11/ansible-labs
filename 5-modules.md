@@ -864,6 +864,13 @@ The HTML pages are in _build/html.
 make[1]: Leaving directory '/home/ubuntu/ansible/docs/docsite'
 
 ```
+You should now deactivate your venv
+
+```console
+(venv) $ deactivate
+```
+
+
 
 Now, notice how, at the end of this process, the [make] command
 tells us where to look for the compiled documentation. If you look in
