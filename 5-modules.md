@@ -754,6 +754,8 @@ Running sanity test 'validate-modules' with Python 3.8
 
 When done, you can deactivate the venv
 
+
+
 ```console
 (venv) $ deactivate
 ```
@@ -807,28 +809,47 @@ outline here:
 $ cp moduledev/remote_filecopy.py lib/ansible/modules/
 ```
 
+Now activate the virtualenv
+
+```
+$ pip install virtualenv
+$ cd ~/ansible
+$ python3 -m venv venv
+$ . venv/bin/activate
+
+(venv) $ source hacking/env-setup
+
+```
+
 2.  Change to the [docs/docsite/] directory as the next step in
     the documentation creation process:
 
 ```
-$ cd docs/docsite/
+(venv) $ cd docs/docsite/
 ```
 
 3.  Build a documentation-based Python file. Use the following command
     to do so:
 
+```console
+(venv) $ chmod 700 /home/ubuntu/ansible/docs/docsite/rst
+(venv) $ pip install -r requirements.txt 
+(venv) $ export MODULES=hello_module
 ```
-$ pip install -r requirements.txt 
-$ MODULES=hello_module make webdocs
-```
 
 
 
-With this in place, you will be able to successfully run [make webdocs] to build your documentation. You will see pages of
+With this in place, you will be able to successfully run [make webdocs] to build your documentation. 
+
+```console
+(venv) $ MODULES=hello_module make webdocs
+
+
+You will see pages of
 output. A successful run should end with something like the output shown
 here:
 
-```
+```console
 ...
 ...
 copying images... [100%] dev_guide/style_guide/images/thenvsthan.jpg                                                                                                                          
