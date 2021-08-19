@@ -613,19 +613,6 @@ $ cp ~/ansible-course/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugin
 $ cp ~/ansible-course/Lab_6/lookup_plugins/firstchar.py ./lib/ansible/plugins/lookup/
 ```
 
-With your code copied into place, you need to test the documentation
-(that is, whether your plugin includes it) as before. You can build the
-[webdocs] documentation in exactly the same way as we did
-in Lab 5 so we will not recap this here.
-However, as a refresher, we can quickly check whether the documentation
-renders correctly using the [ansible-doc] command, as follows:
-
-
-```console
-$ . hacking/env-setup
-```
-
-
 Armed with this knowledge, you should now be well placed to begin your
 own plugin development work, and even to submit your code back to the
 community, if you desire. We\'ll offer a brief recap of this in the next
@@ -703,10 +690,7 @@ working examples. Hopefully, you have found this journey informative and
 valuable and it has enhanced your ability to work with Ansible and
 extend its functionality where required.
 
-
-Summary
-=======
-
+## Summary
 
 In this lab, we learned about the various types of plugins that are
 supported by Ansible, before exploring them in greater detail and
@@ -722,8 +706,7 @@ adhere to when writing your Ansible playbooks to ensure that you produce
 manageable, high-quality automation code.
 
 
-Questions
-=========
+## Questions
 
 1.  Which of the following [ansible-doc] commands can you use to
     list the names of all the cache plugins?
