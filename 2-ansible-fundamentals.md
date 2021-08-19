@@ -1287,12 +1287,12 @@ frontend1-emea.example.com | CHANGED => {
     "checksum": "e0637e631f4ab0aaebef1a6b8822a36f031f332e",
     "dest": "/home/ubuntu/hosts",
     "gid": 0,
-    "group": "root",
+    "group": "ubuntu",
     "md5sum": "a7dc0d7b8902e9c8c096c93eb431d19e",
     "mode": "0644",
-    "owner": "root",
+    "owner": "ubuntu",
     "size": 970,
-    "src": "/root/.ansible/tmp/ansible-tmp-1586110004.75-208447517347027/source",
+    "src": "/home/ubuntu/.ansible/tmp/ansible-tmp-1586110004.75-208447517347027/source",
     "state": "file",
     "uid": 0
 }
@@ -1304,12 +1304,12 @@ frontend2-emea.example.com | CHANGED => {
     "checksum": "e0637e631f4ab0aaebef1a6b8822a36f031f332e",
     "dest": "/home/ubuntu/hosts",
     "gid": 0,
-    "group": "root",
+    "group": "ubuntu",
     "md5sum": "a7dc0d7b8902e9c8c096c93eb431d19e",
     "mode": "0644",
-    "owner": "root",
+    "owner": "ubuntu",
     "size": 970,
-    "src": "/root/.ansible/tmp/ansible-tmp-1586110004.75-208447517347027/source",
+    "src": "/home/ubuntu/.ansible/tmp/ansible-tmp-1586110004.75-208447517347027/source",
     "state": "file",
     "uid": 0
 }
@@ -1354,7 +1354,7 @@ frontend2-emea.example.com | CHANGED => {
     "ansible_job_id": "651461662130.8858",
     "changed": true,
     "finished": 0,
-    "results_file": "/root/.ansible_async/651461662130.8858",
+    "results_file": "/home/ubuntu/.ansible_async/651461662130.8858",
     "started": 1
 }
 ```
