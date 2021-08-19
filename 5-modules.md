@@ -721,7 +721,7 @@ Let\'s get started:
 1.  To run the sanity tests, assuming you have cloned the official
     repository, change into this directory and set up your environment.
     Note that if your standard Python binary isn\'t Python 3, the
-    [ansible-test] tool will not run, so you should ensure Python
+    `ansible-test` tool will not run, so you should ensure Python
     3 is installed and, if necessary, set up a virtual environment to
     ensure you are using Python 3. This can be done as follows:
 
@@ -745,7 +745,7 @@ $ . venv/bin/activate
 
 ```
 (venv) $ cp ~/ansible/moduledev/better_remote_filecopy.py ./lib/ansible/modules/
-(venv) $ ansible-test sanity --requirements --test validate-modules better_remote_filecopy.py
+(venv) $  ~/ansible/bin/ansible-test sanity --requirements --test validate-modules better_remote_filecopy.py
 
 
 Running sanity test 'validate-modules' with Python 3.8
