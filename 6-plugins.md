@@ -27,7 +27,7 @@ Discovering the plugin types
 Let\'s validate the presence of a suitably installed version of
 Ansible on your test machine before proceeding further:
 
-```
+```console
 $  ansible-doc --version
 
 ansible-doc 2.9.6
@@ -48,7 +48,7 @@ run the following commands:
 1.  To use the [ansible-doc] command to list all the plugins
     available in a given category, you can run the following command:
 
-```
+```console
 $ ansible-doc -t connection -l
 ```
 
@@ -56,7 +56,7 @@ This will return a textual index of the connection plugins, similar to
 what we saw when we were looking at the module documentation. The first
 few lines of the index output are shown here:
 
-```
+```console
 kubectl           Execute tasks in pods running on Kubernetes
 napalm            Provides persistent connection using NAPALM
 qubes             Interact with an existing QubesOS AppVM
@@ -73,13 +73,13 @@ paramiko_ssh      Run tasks via python ssh (paramiko)
     example, if we want to learn about the [paramiko\_ssh] plugin,
     we can issue the following command:
 
-```
+```console
 $ ansible-doc -t connection paramiko_ssh
 ```
 
 
 
-```
+```console
 > PARAMIKO (/usr/lib/python3/dist-packages/ansible/plugins/connection/param
 
         Use the python ssh implementation (Paramiko) to connect to
@@ -121,13 +121,22 @@ Finding included plugins
 
 If you installed Ansible on a Linux system using a package manager (that
 is, via an RPM or DEB package), then the location of your plugins will
-depend on your OS. For example, on my test CentOS 7 system where I
+depend on your OS. 
+
+
+For example, on my test CentOS 7 system where I
 installed Ansible from the official RPM package, I can see the plugins
 installed here:
 
-```
+```console
 $ find /usr/lib/ -name *ansible*
 $ ls -ltr /usr/lib/python3/dist-packages/ansible/plugins/
+```
+
+On Ubuntu, we can find them here:
+
+```console
+$ ls /usr/lib/python2.7/dist-packages/ansible/plugins/
 ```
 
 
@@ -136,10 +145,20 @@ after their categories. If we want to look up the [paramiko\_ssh]
 plugin that we reviewed the documentation of in the preceding section,
 we can look in the [connection/] subdirectory:
 
-```
+```console
 $ ls -l /usr/lib/python3/dist-packages/ansible/plugins/connection/paramiko_ssh.py
 
 -rw-r--r-- 1 root root 23544 Mar 5 05:39 /usr/lib/python3/dist-packages/ansible/plugins/connection/paramiko_ssh.py
+```
+
+
+Or on Ubuntu:
+
+```console
+
+$ ls /usr/lib/python2.7/dist-packages/ansible/plugins/connection/paramiko_ssh.py
+-rw-r--r-- 1 root root 23544 Mar 5 05:39 /usr/lib/python2.7/dist-packages/ansible/plugins/connection/paramiko_ssh.py
+
 ```
 
 As one of our goals in this lab is to write our own simple custom plugin, let\'s look at how to find the
@@ -148,7 +167,7 @@ plugins in the official Ansible source code:
 1.  Clone the official Ansible repository from GitHub, as we did
     previously, and change the directory to the location of your clone:
 
-```
+```console
 $ cd ~ && rm -r ansible     # delete existing clone
 $ git clone https://github.com/ansible/ansible.git
 $ cd ansible
@@ -158,14 +177,14 @@ $ cd ansible
     that the plugins are all contained (again, in categorized
     subdirectories) under [lib/ansible/plugins/]:
 
-```
+```console
 $ cd lib/ansible/plugins
 ```
 
 3.  We can explore the connection-based plugins by looking in the
     [connection] directory:
 
-```
+```console
 $ ls -al connection/
 ```
 
@@ -175,7 +194,7 @@ Ansible source code that you have cloned. At the time of writing, it
 looks as follows, with one Python file for each plugin :
 
 
-```
+```console
 $ ls -al connection/
 
 total 176
@@ -196,7 +215,7 @@ drwxr-xr-x 19 root root 297 Apr 15 17:24 ..
     they work, which is again part of the beauty of open source
     software:
 
-```
+```console
 $ less connection/paramiko_ssh.py
 ```
 
@@ -204,7 +223,7 @@ An example of the beginning of this file is shown in the following code
 block to give you an idea of the kind of output you should be seeing if
 this command runs correctly:
 
-```
+```console
 # (c) 2012, Michael DeHaan <michael.dehaan@gmail.com>
 # (c) 2017 Ansible Project
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
@@ -224,7 +243,7 @@ DOCUMENTATION = """
 
 
 
-Notice the [DOCUMENTATION] block, which is very similar to what we
+Notice the `DOCUMENTATION` block, which is very similar to what we
 saw when we were working with the module source code. If you explore the
 source code of each plugin, you will find that the structure bears some
 similarity to the module code structure. However, rather than simply
@@ -256,7 +275,7 @@ Perform the following steps to create and test your plugin code:
     appropriate to your plugin, but the following text is given as an
     example for you to get started with:
 
-```
+```python
 # (c) 2020, Fenago <ansible@fenago.com>
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 ```
@@ -267,7 +286,7 @@ Perform the following steps to create and test your plugin code:
     inside a [string] variable. The following example looks for
     instances of [Puppet] and replaces them with [Ansible]:
 
-```
+```python
 def improve_automation(a):
  return a.replace("Puppet", "Ansible")
 ```
@@ -278,7 +297,7 @@ def improve_automation(a):
     definition and return the value of our previously defined filter
     function to Ansible:
 
-```
+```python
 class FilterModule(object):
        '''improve_automation filters'''
        def filters(self):
@@ -295,7 +314,7 @@ class FilterModule(object):
     applying our newly defined filter to the string:
 
 
-```
+```yaml
 ---
 - name: Play to demonstrate our custom filter
   hosts: frontends
@@ -318,7 +337,7 @@ subdirectory to house our module, we can also create a
 tree structure, when you have finished coding the various file details
 in the preceding code block, should look something like this:
 
-```
+```console
 .
 ├── filter_plugins
 │   ├── custom_filter.py
@@ -330,7 +349,7 @@ Let\'s now run our little test playbook and see what output we get. If
 all goes well, it should look something like the following:
 
 
-```
+```console
 $ cd ~//ansible-course/Lab_6/
 $ ansible-playbook -i hosts myplugin.yml
 
@@ -363,7 +382,7 @@ a directory called [lookup\_plugins/]:
     chunk of the original [file.py] [lookup] plugin code for
     our example, so it is important we include the relevant credit:
 
-```
+```python
 # (c) 2020, Fenago <ansible@fenago.com>
 # (c) 2017 Ansible Project
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
@@ -372,7 +391,7 @@ a directory called [lookup\_plugins/]:
 2.  Next, add in the Python 3 headers---these are an absolute
     requirement if you intend to submit your plugin via a **Pull Request** (**PR**) to the Ansible project:
 
-```
+```python
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 ```
@@ -380,7 +399,7 @@ __metaclass__ = type
 3.  Next, add a [DOCUMENTATION] block to your plugin so that other
     users can understand how to interact with it:
 
-```
+```python
 DOCUMENTATION = """
     lookup: firstchar
     author: Fenago <ansible@fenago.com>
@@ -401,7 +420,7 @@ DOCUMENTATION = """
 4.  Add the relevant [EXAMPLES] blocks to show how to use your
     plugin, just as we did for modules:
 
-```
+```python
 EXAMPLES = """
 - debug: msg="the first character in foo.txt is {{lookup('firstchar', '/etc/foo.txt') }}"
 
@@ -411,7 +430,7 @@ EXAMPLES = """
 5.  Also, make sure you document the [RETURN] values from your
     plugin:
 
-```
+```python
 RETURN = """
   _raw:
     description:
@@ -426,7 +445,7 @@ RETURN = """
     be used in place of the [print] statements in your plugin code
     if you need to display the [debug] output:
 
-```
+```python
 from ansible.errors import AnsibleError, AnsibleParserError
 from ansible.plugins.lookup import LookupBase
 from ansible.utils.display import Display
@@ -440,7 +459,7 @@ display = Display()
     [lookup] plugin framework) and initialize an empty array for
     our return data:
 
-```
+```python
 class LookupModule(LookupBase):
 
     def run(self, terms, variables=None, **kwargs):
@@ -457,7 +476,7 @@ class LookupModule(LookupBase):
     define an object with the details of each of the files we will open,
     called [lookupfile]:
 
-```
+```python
       for term in terms:
             display.debug("File lookup term: %s" % term)
 
@@ -476,7 +495,7 @@ class LookupModule(LookupBase):
     that easy-to-understand error messages are passed back to the user,
     rather than to Python tracebacks:
 
-```
+```python
             try:
                 if lookupfile:
                contents, show_data = self._loader._get_file_contents(lookupfile)
@@ -494,14 +513,14 @@ also remove any training spaces using [rstrip].
 10. Finally, we return the character we gathered from the file to
     Ansible with a [return] statement:
 
-```
+```python
         return ret
 ```
 
 11. Once again, we can create a simple test playbook to test out our
     newly created plugin:
 
-```
+```yaml
 ---
 - name: Play to demonstrate our custom lookup plugin
   hosts: frontends
@@ -520,13 +539,13 @@ referencing our [lookup] plugin to obtain the output.
     [testdoc.txt]. This can contain anything you like---mine
     contains the following simple text:
 
-```
+```text
 Hello
 ```
 
 For clarity, your final directory structure should look as follows:
 
-```
+```console
 .
 ├── hosts
 ├── lookup_plugins
@@ -538,7 +557,7 @@ For clarity, your final directory structure should look as follows:
 13. Now, when we run our new playbook, we should see an output similar
     to the following:
 
-```
+```console
 $ ansible-playbook -i hosts myplugin2.yml
 
 
@@ -572,7 +591,7 @@ As before, your first task will be to obtain a copy of the official
 Ansible project source code---for example, by cloning the GitHub
 repository to your local machine:
 
-```
+```console
 $ cd ~/ansible
 ```
 
@@ -582,7 +601,7 @@ plugin directories.
 1.  For example, our example filter would be copied to the following
     directory in the source code you just cloned:
 
-```
+```console
 $ cp ~//ansible-course/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugins/filter/
 ```
 
@@ -590,7 +609,7 @@ $ cp ~//ansible-course/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugi
     [lookup] plugin\'s directory, using a command such as the
     following:
 
-```
+```console
 $ cp ~//ansible-course/Lab_6/lookup_plugins/firstchar.py ./lib/ansible/plugins/lookup/
 ```
 
@@ -602,7 +621,7 @@ However, as a refresher, we can quickly check whether the documentation
 renders correctly using the [ansible-doc] command, as follows:
 
 
-```
+```console
 $ . hacking/env-setup
 ```
 
@@ -635,7 +654,7 @@ with the upstream Ansible project:
     machine. Use a command similar to the following, but be sure to
     replace the URL with one that matches your own GitHub account:
 
-```
+```console
 $ git clone https://github.com/<your GitHub account>/ansible.git
 ```
 
@@ -649,7 +668,7 @@ $ git clone https://github.com/<your GitHub account>/ansible.git
     and then commit it with a meaningful [commit] message. Some
     example commands are shown here:
 
-```
+```console
 $ cd ansible
 $ cp ~/ansible-development/plugindev/firstchar.py ./lib/ansible/plugins/lookup
 $ git add lib/ansible/plugins/lookup/firstchar.py
@@ -659,7 +678,7 @@ $ git commit -m 'Added tested version of firstchar.py for pull request creation'
 3.  Now, be sure to push the code to your forked repository using the
     following command:
 
-```
+```console
 $ git push
 ```
 
