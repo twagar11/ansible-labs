@@ -818,7 +818,7 @@ $ cd docs/docsite/
     to do so:
 
 ```
-$ pip3 install -r requirements.txt 
+$ pip install -r requirements.txt 
 $ MODULES=hello_module make webdocs
 ```
 
