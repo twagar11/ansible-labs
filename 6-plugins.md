@@ -263,8 +263,8 @@ creating one, it will live in its own single Python file. You could
 propose a modification to one of the Ansible core filter Python files if
 you want to submit your code back to the Ansible project; but for now,
 we\'ll leave that as a project for you to complete yourself. Our filter
-file will be called [custom\_filter.py] and it will live in a
-directory called [filter\_plugins], which must be in the same
+file will be called [`custom_filter.py` and it will live in a
+directory called `filter_plugins`, which must be in the same
 directory as your playbook.
 
 Perform the following steps to create and test your plugin code:
@@ -283,7 +283,7 @@ Perform the following steps to create and test your plugin code:
 2.  Next, we\'ll add a very simple Python function---yours can be as
     complex as you want it to be, but for ours, we will simply use the
     Python [.replace] function to replace one string with another
-    inside a [string] variable. The following example looks for
+    inside a `string` variable. The following example looks for
     instances of [Puppet] and replaces them with [Ansible]:
 
 ```python
@@ -291,7 +291,7 @@ def improve_automation(a):
  return a.replace("Puppet", "Ansible")
 ```
 
-3.  Next, we need to create an object of the [FilterModule] class,
+3.  Next, we need to create an object of the `FilterModule` class,
     which is how Ansible will know that this Python file contains a
     filter. Within this object, we can create a [filters]
     definition and return the value of our previously defined filter
@@ -371,15 +371,15 @@ As you can see, our new filter plugin replaced the
 
 
 As an example of this, let\'s repeat the preceding process, but to
-create a [lookup] plugin, instead. This plugin will be based
-heavily on a simplified version of the file [lookup] plugin.
+create a `lookup` plugin, instead. This plugin will be based
+heavily on a simplified version of the file `lookup` plugin.
 If you intend to test
 this from a playbook, as executed previously, you should create this in
 a directory called [lookup\_plugins/]:
 
 1.  Start by adding a header to the plugin file, as before, so that the
     maintainer and copyright details are clear. We are borrowing a large
-    chunk of the original [file.py] [lookup] plugin code for
+    chunk of the original [file.py] `lookup` plugin code for
     our example, so it is important we include the relevant credit:
 
 ```python
@@ -456,7 +456,7 @@ display = Display()
 7.  We will now create an object of
     the [LookupModule] class. Define a default function within
     this called [run] (this is expected for the Ansible
-    [lookup] plugin framework) and initialize an empty array for
+    `lookup` plugin framework) and initialize an empty array for
     our return data:
 
 ```python
@@ -533,7 +533,7 @@ also remove any training spaces using [rstrip].
 ```
 
 Again, we are using the debug module to print output to the console and
-referencing our [lookup] plugin to obtain the output.
+referencing our `lookup` plugin to obtain the output.
 
 12. Create the text file referenced in the previous code block, called
     [testdoc.txt]. This can contain anything you like---mine
@@ -605,8 +605,8 @@ plugin directories.
 $ cp ~/ansible-course/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugins/filter/
 ```
 
-2.  Similarly, our custom [lookup] plugin would go in the
-    [lookup] plugin\'s directory, using a command such as the
+2.  Similarly, our custom `lookup` plugin would go in the
+    `lookup` plugin\'s directory, using a command such as the
     following:
 
 ```console
@@ -663,7 +663,7 @@ $ git clone https://github.com/<your GitHub account>/ansible.git
     is just an example to give you an idea as to what to do---in
     reality, you should choose the appropriate category subdirectory for
     your plugin as it won\'t necessarily fit into
-    the [lookup] category. Once you\'ve added your Python file,
+    the `lookup` category. Once you\'ve added your Python file,
     perform a [git add] command to make Git aware of the new file,
     and then commit it with a meaningful [commit] message. Some
     example commands are shown here:
@@ -738,7 +738,7 @@ D\) [ansible-doc -t cache -l]
 
 E\) [ansible-doc cache]
 
-2.  Which class do you need to add to your [lookup] plugin\'s code
+2.  Which class do you need to add to your `lookup` plugin\'s code
     to include the bulk of the plugin code, including [run()],
     the [items] loop, [try], and [except]?
 
