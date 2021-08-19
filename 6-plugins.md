@@ -350,7 +350,7 @@ all goes well, it should look something like the following:
 
 
 ```console
-$ cd ~//ansible-course/Lab_6/
+$ cd ~/ansible-course/Lab_6/
 $ ansible-playbook -i hosts myplugin.yml
 
 
@@ -602,7 +602,7 @@ plugin directories.
     directory in the source code you just cloned:
 
 ```console
-$ cp ~//ansible-course/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugins/filter/
+$ cp ~/ansible-course/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugins/filter/
 ```
 
 2.  Similarly, our custom [lookup] plugin would go in the
@@ -610,7 +610,7 @@ $ cp ~//ansible-course/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugi
     following:
 
 ```console
-$ cp ~//ansible-course/Lab_6/lookup_plugins/firstchar.py ./lib/ansible/plugins/lookup/
+$ cp ~/ansible-course/Lab_6/lookup_plugins/firstchar.py ./lib/ansible/plugins/lookup/
 ```
 
 With your code copied into place, you need to test the documentation
