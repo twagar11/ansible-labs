@@ -352,6 +352,7 @@ development process. Use the following command to clone the Ansible
 repository to your current directory on your development machine:
 
 ```
+$ pip install virtualenv
 $ cd ~ && git clone https://github.com/ansible/ansible.git
 $ cd ansible
 $ python -m virtualenv moduledev
