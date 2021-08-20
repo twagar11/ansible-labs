@@ -540,7 +540,7 @@ will look as follows:
 
   tasks:
   - name: Perform an rsync from localhost to inventory hosts
-    local_action: command rsync -a /tmp/ {{ inventory_hostname }}:/tmp/target/
+    local_action: command rsync -a /tmp/source {{ inventory_hostname }}:/tmp/target/
 ```
 
 The preceding shorthand notation is equivalent to the following:
@@ -550,6 +550,13 @@ tasks:
   - name: Perform an rsync from localhost to inventory hosts
     command: rsync -a /tmp/ {{ inventory_hostname }}:/tmp/target/
     delegate_to: localhost
+```
+
+Before we run this, go ahead and create the directory
+
+```bash
+mkdir /tmp/source
+touch /tmp/source/foo
 ```
 
 If we run this playbook, we can see that [local\_action] does
