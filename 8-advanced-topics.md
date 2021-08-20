@@ -458,11 +458,14 @@ these scripts!
 
   tasks:
     - name: Remove host from the load balancer
-      command: ./remove_from_loadbalancer.sh {{ inventory_hostname }}
+      command: bash ./remove_from_loadbalancer.sh {{ inventory_hostname }}
       args:
         chdir: "{{ playbook_dir }}"
       delegate_to: localhost
 ```
+
+If you want to run the script as `./remove_from_loadbalancer.sh` you 
+must run `chmod 744 ./remove_from_loadbalancer.sh` .
 
 
 4.  After this, we add a task where the upgrade work is carried out.
@@ -481,11 +484,14 @@ these scripts!
 
 ```yaml
     - name: Add host back to the load balancer
-      command: ./add_to_loadbalancer.sh {{ inventory_hostname }}
+      command: bash ./add_to_loadbalancer.sh {{ inventory_hostname }}
       args:
         chdir: "{{ playbook_dir }}"
       delegate_to: localhost
 ```
+
+If you want to run the script as `./add_to_loadbalancer.sh` you 
+must run `chmod 744 ./add_to_loadbalancer.sh` .
 
 6.  Let\'s see this playbook in action:
 
