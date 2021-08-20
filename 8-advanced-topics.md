@@ -1,9 +1,4 @@
-<img align="right" src="./images/logo.png">
-
-
-
-Lab 8. Advanced Ansible Topics
-=======================
+# Lab 8. Advanced Ansible Topics
 
 
 In this lab, we will cover the following topics:
@@ -295,6 +290,30 @@ For our practical example, let\'s consider an expanded inventory with
 ```
 [frontends]
 frt[01:10].example.com
+```
+
+For this to work, we need to ensure that the 10 machienes frt01 up to frt10
+are definied in `/etc/hosts`
+
+```
+$ sudo vim /etc/hosts
+```
+
+And ensure that we see the following hosts defined:
+
+```console
+
+frt01.example.com
+frt02.example.com
+frt03.example.com
+frt04.example.com
+frt05.example.com
+frt06.example.com
+frt07.example.com
+frt08.example.com
+frt09.example.com
+frt10.example.com
+
 ```
 
 Now, let\'s create a simple playbook to run on these hosts. We will set
