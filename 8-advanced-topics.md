@@ -27,7 +27,7 @@ Make sure that following entries exist in `/home/ubuntu/hosts` file  before star
 
 `cat /home/ubuntu/hosts`
 
-```
+```ini
 [frontends]
 frt01.example.com
 frt02.example.com
@@ -39,7 +39,7 @@ Asynchronous versus synchronous actions
 Ansible tasks can be run asynchronously. Let\'s explore this through a practical example. Suppose we
 have two servers in a simple INI-formatted inventory:
 
-```
+```ini
 [frontends]
 frt01.example.com
 frt02.example.com
@@ -51,7 +51,7 @@ than have it run with the SSH connection blocked for the duration of the
 [sleep] command, we\'ll add two special parameters to the task, as
 shown:
 
-```
+```yaml
 ---
 - name: Play to demonstrate asynchronous tasks
   hosts: frontends
@@ -77,7 +77,7 @@ difference. But behind the scenes, Ansible checks the task every
 value of [30] seconds:
 
 
-```
+```console
 $ ansible-playbook -i hosts async.yml
 
 PLAY [Play to demonstrate asynchronous tasks] **********************************
@@ -100,7 +100,7 @@ to [0]), you could add a second task to your playbook so that it
 looks as follows:
 
 
-```
+```yaml
 ---
 - name: Play to demonstrate asynchronous tasks
   hosts: frontends
@@ -135,7 +135,7 @@ them---but to keep this example simple, we will run the two tasks
 sequentially. Running this playbook should yield an output similar to
 the following:
 
-```
+```console
 $ ansible-playbook -i hosts async2.yml
 
 PLAY [Play to demonstrate asynchronous tasks] **********************************
@@ -171,8 +171,7 @@ set are met. In this case, we can see that the task finished
 successfully and the overall play result was successful.
 
 
-Control play execution for rolling updates
-==========================================
+## Control play execution for rolling updates
 
 By default, Ansible parallelizes tasks on multiple hosts. The setting for
 this is defined by the [forks] parameter in the Ansible
@@ -187,7 +186,7 @@ attempts to run its automation job on five hosts at the same time).
     task is run, as well as if you specify [-v] to increase the
     verbosity when you run the play:
 
-```
+```yaml
 ---
 - name: Simple serial demonstration play
   hosts: frontends
@@ -206,7 +205,7 @@ attempts to run its automation job on five hosts at the same time).
     Ansible, but not really what we want as our users will experience
     service outage:
 
-```
+```console
 $ ansible-playbook -i hosts serial.yml
 
 PLAY [Simple serial demonstration play] ****************************************
@@ -228,7 +227,7 @@ frt02.example.com : ok=2 changed=2 unreachable=0 failed=0 skipped=0 rescued=0 ig
 3.  Now, let\'s modify the play definition, as shown. We\'ll leave the
     [tasks] sections exactly as they were in *step 1*:
 
-```
+```yaml
 ---
 - name: Simple serial demonstration play
   hosts: frontends
@@ -241,7 +240,7 @@ frt02.example.com : ok=2 changed=2 unreachable=0 failed=0 skipped=0 rescued=0 ig
     moving on to the next. If we run the play again, we can see this in
     action:
 
-```
+```console
 $ ansible-playbook -i hosts serial.yml
 
 PLAY [Simple serial demonstration play] ****************************************
@@ -268,7 +267,7 @@ frt02.example.com : ok=2 changed=2 unreachable=0 failed=0 skipped=0 rescued=0 ig
 
 You can even build on this by passing a list to the [serial] directive. Consider the following code:
 
-```
+```yaml
   serial:
     - 1
     - 3
@@ -280,14 +279,13 @@ the next [3], and then on batches of [5] at a time until the
 inventory is completed.
 
 
-Configuring the maximum failure percentage
-==========================================
+## Configuring the maximum failure percentage
 
 
 For our practical example, let\'s consider an expanded inventory with
 [10] hosts in it. We\'ll define this as follows:
 
-```
+```ini
 [frontends]
 frt[01:10].example.com
 ```
@@ -295,7 +293,7 @@ frt[01:10].example.com
 For this to work, we need to ensure that the 10 machienes frt01 up to frt10
 are definied in `/etc/hosts`
 
-```
+```console
 $ sudo vim /etc/hosts
 ```
 
@@ -323,7 +321,7 @@ our batch size to [5] and [max\_fail\_percentage] to
 1.  Create the following play definition to demonstrate the use of the
     [max\_fail\_percentage] directive:
 
-```
+```yaml
 ---
 - name: A simple play to demonstrate use of max_fail_percentage
   hosts: frontends
@@ -346,7 +344,7 @@ still continue. 
     in the batch, then it should deliberately fail this task regardless
     of the result; otherwise, it should allow the task to run as normal:
 
-```
+```yaml
   tasks:
     - name: A task that will sometimes fail
       debug:
@@ -357,7 +355,7 @@ still continue. 
 3.  Finally, we\'ll add a second task that will always succeed. This is
     run if the play is allowed to continue, but not if it is aborted:
 
-```
+```yaml
     - name: A task that will succeed
       debug:
         msg: Success!
@@ -371,7 +369,7 @@ causes three of the hosts in the first batch of 5 (60%) to fail. 
 
 4.  Run the playbook and let\'s observe what happens:
 
-```
+```console
 $ ansible-playbook -i morehosts maxfail.yml
 
 PLAY [A simple play to demonstrate use of max_fail_percentage] *****************
@@ -406,8 +404,7 @@ frt05.example.com : ok=1 changed=0 unreachable=0 failed=0 skipped=0 rescued=0 ig
 ```
 
 
-Setting task execution delegation
-=================================
+##  Setting task execution delegation
 
 Although we still want to run our play across our entire inventory, we
 certainly don\'t want to run the load balancer commands from those
@@ -415,7 +412,7 @@ hosts. Let\'s once again explain this in more detail with a practical
 example. We\'ll reuse the two simple host inventories that we used
 earlier in this lab:
 
-```
+```ini
 [frontends]
 frt01.example.com
 frt02.example.com
@@ -431,7 +428,7 @@ add and remove hosts to and from a load balancer:
     called [remove\_from\_loadbalancer.sh], which will contain the
     following:
 
-```
+```console
 #!/bin/sh
 echo Removing $1 from load balancer...
 ```
@@ -440,7 +437,7 @@ echo Removing $1 from load balancer...
     called [add\_to\_loadbalancer.sh], which will contain the
     following:
 
-```
+```console
 #!/bin/sh
 echo Adding $1 to load balancer...
 ```
@@ -454,7 +451,7 @@ these scripts!
     [max\_fail\_percentage] directives as you wish) and an initial
     task:
 
-```
+```yaml
 ---
 - name: Play to demonstrate task delegation
   hosts: frontends
@@ -472,7 +469,7 @@ these scripts!
     This task has no [delegate\_to] directive, and so it is
     actually run on the remote host from the inventory (as desired):
 
-```
+```yaml
     - name: Deploy code to host
       debug:
         msg: Deployment code would go here....
@@ -482,7 +479,7 @@ these scripts!
     script we created earlier. This task is almost identical to the
     first:
 
-```
+```yaml
     - name: Add host back to the load balancer
       command: ./add_to_loadbalancer.sh {{ inventory_hostname }}
       args:
@@ -492,7 +489,7 @@ these scripts!
 
 6.  Let\'s see this playbook in action:
 
-```
+```console
 $ ansible-playbook -i hosts delegate.yml
 
 PLAY [Play to demonstrate task delegation] *************************************
@@ -530,7 +527,7 @@ line that would ordinarily be run with [delegate\_to: localhost]
 added below it. Wrapping this all up into a second example, our playbook
 will look as follows:
 
-```
+```yaml
 ---
 - name: Second task delegation example
   hosts: localhost
@@ -542,7 +539,7 @@ will look as follows:
 
 The preceding shorthand notation is equivalent to the following:
 
-```
+```yaml
 tasks:
   - name: Perform an rsync from localhost to inventory hosts
     command: rsync -a /tmp/ {{ inventory_hostname }}:/tmp/target/
@@ -555,7 +552,7 @@ efficiently copy whole directory trees across to remote servers in the
 inventory:
 
 
-```
+```console
 $ ansible-playbook delegate2.yml
 
 PLAY [Second task delegation example] ******************************************
@@ -571,8 +568,7 @@ localhost : ok=2 changed=1 unreachable=0 failed=0 skipped=0 rescued=0 ignored=0
 ```
 
 
-Using the run\_once option
-==========================
+## Using the `run_once` option
 
 You can make use of the special [run\_once] directive for any tasks you want to run
 only once on your inventory. For example, let\'s reuse the 10-host
@@ -584,7 +580,7 @@ to demonstrate this option, as follows:
     you would insert your script or command that performs your one-off
     cluster function here (for example, upgrading a database schema):
 
-```
+```yaml
 ---
 - name: Play to demonstrate the run_once directive
   hosts: frontends
@@ -598,7 +594,7 @@ to demonstrate this option, as follows:
 
 2.  Now, let\'s run this playbook and see what happens:
 
-```
+```console
 $ ansible-playbook -i morehosts runonce.yml
 
 PLAY [Play to demonstrate the run_once directive] ******************************
@@ -649,7 +645,7 @@ upgrade task on one host. 
 Add [serial: 5] to your play definition and rerun the playbook.
 The output should appear as follows:
 
-```
+```console
 $ ansible-playbook -i morehosts runonce.yml
 
 PLAY [Play to demonstrate the run_once directive] ******************************
@@ -709,7 +705,7 @@ inventory is local or remote---it simply tries faithfully to connect).
 Indeed, we can try creating a [local] inventory file with the
 following contents:
 
-```
+```ini
 [local]
 localhost
 ```
@@ -719,7 +715,7 @@ against this inventory, we see the following:
 
 Password: **fenago**
 
-```
+```console
 $ ansible -i localhosts -m ping all --ask-pass
 
 
@@ -736,7 +732,7 @@ localhost | SUCCESS => {
 
 We can now modify our inventory so that it looks as follows:
 
-```
+```ini
 [local]
 localhost ansible_connection=local
 ```
@@ -754,7 +750,7 @@ follows, Ansible will not even attempt to connect to the remote host
 called [frt01.example.com---]it will connect locally to the
 machine running the playbook (without SSH):
 
-```
+```ini
 [local]
 frt01.example.com ansible_connection=local
 ```
@@ -762,15 +758,15 @@ frt01.example.com ansible_connection=local
 We can demonstrate this very simply. Let\'s first check for the absence
 of a test file in our local [/tmp] directory:
 
-```
-ls -l /tmp/foo
+```console
+$ ls -l /tmp/foo
 ls: cannot access /tmp/foo: No such file or directory
 ```
 
 Now, let\'s run an ad hoc command to touch this file on all hosts in the
 new inventory we just defined:
 
-```
+```console
 $ ansible -i localhosts2 -m file -a "path=/tmp/foo state=touch" all
 
 frt01.example.com | CHANGED => {
@@ -792,7 +788,7 @@ frt01.example.com | CHANGED => {
 The command ran successfully, so let\'s see whether the test file is
 present on the local machine:
 
-```
+```console
 $ ls -l /tmp/foo
 -rw-r--r-- 1 ubuntu root 0 Apr 24 16:28 /tmp/foo
 ```
@@ -804,13 +800,12 @@ this command was run on the local machine without using SSH.
 
 
 
-Working with proxies and jump hosts
-===================================
+## Working with proxies and jump hosts
 
 Let\'s assume that you have two Cumulus Networks switches in your network (these are based on a
 special distribution of Linux for switching hardware, which is very
 similar to Debian). These two switches have
-the [cmls01.example.com] and [cmls02.example.com] hostnames,
+the `cmls01.example.com` and `cmls02.example.com` hostnames,
 but both can only be accessed from a host called
 [bastion.example.com].
 
@@ -818,7 +813,7 @@ The configuration to support our [bastion] host is performed in
 the inventory, rather than in the playbook. We begin by defining an
 inventory group with the switches in, in the normal manner:
 
-```
+```ini
 [switches]
 cmls01.example.com
 cmls02.example.com
@@ -828,7 +823,7 @@ However, we can now start to get clever by adding some special SSH
 arguments into the inventory variables for this group. Add the following
 code to your inventory file:
 
-```
+```ini
 [switches:vars]
 ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q bastion.example.com"'
 ```
@@ -837,14 +832,14 @@ This special variable content tells Ansible to add extra options when it
 sets up an SSH connection, including to proxy via
 the [bastion.example.com] host. The [-W %h:%p] options tell
 SSH to proxy the connection and to connect to the host specified by
-[%h] (this is either [cmls01.example.com] or
-[cmls02.example.com]) on the port specified by [%p] (usually
-port [22]).
+`%h` (this is either [cmls01.example.com] or
+`cmls02.example.com`) on the port specified by `%p` (usually
+port `22`).
 
 Now, if we attempt to run the Ansible [ping] module against this
 inventory, we can see whether it works:
 
-```
+```console
 $ ansible -i switches -m ping all
 
 cmls02.example.com | SUCCESS => {
@@ -872,8 +867,7 @@ two hosts. However, behind the scenes it proxies via
 
 
 
-Configuring playbook prompts
-============================
+## Configuring playbook prompts
 
 
 Let\'s reuse the two host frontend inventories we defined at the
@@ -882,7 +876,7 @@ from users during a playbook run with a practical example:
 
 1.  Create a simple play definition in the usual manner, as follows:
 
-```
+```yaml
 ---
 - name: A simple play to demonstrate prompting in a playbook
   hosts: frontends
@@ -896,7 +890,7 @@ from users during a playbook run with a practical example:
     password. One will be echoed to the screen, while the other won\'t
     be, by setting [private: yes]:
 
-```
+```yaml
   vars_prompt:
     - name: loginid
       prompt: "Enter your username"
@@ -909,7 +903,7 @@ from users during a playbook run with a practical example:
 3.  We\'ll now add a single task to our playbook to demonstrate this
     prompting process of setting the variables:
 
-```
+```yaml
   tasks:
     - name: Proceed with login
       debug:
@@ -918,7 +912,7 @@ from users during a playbook run with a practical example:
 
 4.  Now, let\'s run the playbook and see how it behaves:
 
-```
+```console
 $ ansible-playbook -i hosts prompt.yml
 
 Enter your username: ubuntu
@@ -949,8 +943,7 @@ you can selectively run your tasks from within your plays with the use
 of tags.
 
 
-Placing tags in the plays and tasks
-===================================
+## Placing tags in the plays and tasks
 
 In this section we
 will build a simple playbook with two --- each bearing a different
@@ -961,7 +954,7 @@ inventories that we worked with previously:
     install the [nginx] package and the other to deploy a
     configuration file from a template:
 
-```
+```yaml
 ---
 - name: Simple play to demonstrate use of tags
   hosts: frontends
@@ -988,7 +981,7 @@ inventories that we worked with previously:
     have tags matching the ones that are specified. So, for example, run
     the following command:
 
-```
+```console
 $ ansible-playbook -i hosts tags.yml --tags install
 
 PLAY [Simple play to demonstrate use of tags] **********************************
@@ -1015,7 +1008,7 @@ this tag when running the playbook.
     if we run the playbook again but skip the [customize] tag, we
     should see an output similar to the following:
 
-```
+```console
 $ ansible-playbook -i hosts tags.yml --skip-tags customize
 
 PLAY [Simple play to demonstrate use of tags] **********************************
@@ -1043,7 +1036,7 @@ than running the playbook --- lists the tasks from the playbook that would
 perform if you run it. Some examples are provided for you in the
 following code block, based on the example playbook we just created:
 
-```
+```console
 $ ansible-playbook -i hosts tags.yml --skip-tags customize --list-tasks
 
 playbook: tags.yml
@@ -1078,8 +1071,7 @@ achieve the playbook flow that you wanted.
 
 
 
-Securing data with Ansible Vault
-================================
+## Securing data with Ansible Vault
 
 
 Let\'s proceed with a simple example that shows you how you can use Ansible Vault:
@@ -1091,7 +1083,7 @@ Let\'s proceed with a simple example that shows you how you can use Ansible Vaul
 **Note:** Use password : `fenago`. You can also choose any password.
 
 
-```
+```console
 $ ansible-vault create secret.yml
 New Vault password:
 Confirm New Vault password:
@@ -1106,7 +1098,7 @@ confirm it by entering it a second time.
     [vars] file, in the normal manner, containing your sensitive
     data:
 
-```
+```yaml
 ---
 secretdata: "Ansible is cool!"
 ```
@@ -1116,7 +1108,7 @@ secretdata: "Ansible is cool!"
     contents of your file, you will see that they are encrypted and are
     safe from anyone who shouldn\'t be able to read the file:
 
-```
+```console
 $ cat secret.yml
 
 $ANSIBLE_VAULT;1.1;AES256
@@ -1133,7 +1125,7 @@ $ANSIBLE_VAULT;1.1;AES256
     Ansible your vault password). Let\'s create a simple playbook as
     follows:
 
-```
+```yaml
 ---
 - name: A play that makes use of an Ansible Vault
   hosts: frontends
@@ -1156,7 +1148,7 @@ determines whether they are encrypted or not. 
     password is---in this instance, you should receive an error such as
     this:
 
-```
+```console
 $ ansible-playbook -i hosts vaultplaybook.yml
 
 ERROR! Attempting to decrypt but no vault secrets found
@@ -1169,7 +1161,7 @@ ERROR! Attempting to decrypt but no vault secrets found
     this in a minute), but for simplicity, try running the following
     command and enter your vault password when prompted:
 
-```
+```console
 $ ansible-playbook -i hosts vaultplaybook.yml --ask-vault-pass
 Vault password:
 
@@ -1199,7 +1191,7 @@ data for inclusion in an otherwise unencrypted playbook. Run the following
 command in your shell (it should produce an output similar to what is
 shown):
 
-```
+```console
 $ ansible-vault encrypt_string 'Ansible is cool!' --name secretdata
 
 New Vault password:
@@ -1217,7 +1209,7 @@ Encryption successful
 You can copy and paste the output of this command into a playbook. So,
 if we modify our earlier example, it would appear as follows:
 
-```
+```yaml
 ---
 - name: A play that makes use of an Ansible Vault
   hosts: frontends
