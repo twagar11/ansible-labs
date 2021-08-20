@@ -822,6 +822,11 @@ the `cmls01.example.com` and `cmls02.example.com` hostnames,
 but both can only be accessed from a host called
 [bastion.example.com].
 
+For this to work we need to add `cmls01.example.com`, `cmls02.example.com`, and `bastion.example.com` to
+`/etc/hosts` file.
+
+
+
 The configuration to support our [bastion] host is performed in
 the inventory, rather than in the playbook. We begin by defining an
 inventory group with the switches in, in the normal manner:
