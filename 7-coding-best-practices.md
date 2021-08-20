@@ -1,9 +1,5 @@
-<img align="right" src="./images/logo.png">
+# Lab 7. Coding Best Practices
 
-
-
-Lab 7. Coding Best Practices
-=====================
 
 
 In this lab, we will cover the following topics:
@@ -23,8 +19,7 @@ All lab file are present at below path. Run following command in the terminal fi
 `cd ~/ansible-course/Lab_7` 
 
 
-The preferred directory layout
-==============================
+## The preferred directory layout
 
 In this lab, let\'s get started with a practical example of
 this to show you a great way of setting up your directory structure for
@@ -42,7 +37,7 @@ Let\'s get started by building the directory structure:
 1.  Create a directory tree for your development inventory with the
     following commands:
 
-```
+```console
 $ mkdir -p inventories/development/group_vars
 $ mkdir -p inventories/development/host_vars
 ```
@@ -52,7 +47,7 @@ $ mkdir -p inventories/development/host_vars
     simple with just two servers. The file to create
     is [inventories/development/hosts]:
 
-```
+```ini
 [app]
 app01.dev.example.com
 app02.dev.example.com
@@ -62,7 +57,7 @@ app02.dev.example.com
     group. Create a file called [app.yml] in
     the [group\_vars] directory we created in the previous step:
 
-```
+```yaml
 ---
 http_port: 8080
 ```
@@ -70,7 +65,7 @@ http_port: 8080
 4.  Next, create a [production] directory structure using the same
     method:
 
-```
+```console
 $ mkdir -p inventories/production/group_vars
 $ mkdir -p inventories/production/host_vars
 ```
@@ -78,7 +73,7 @@ $ mkdir -p inventories/production/host_vars
 5.  Create an inventory file called [hosts] in the newly created
     [production] directory with the following contents:
 
-```
+```ini
 [app]
 app01.prod.example.com
 app02.prod.example.com
