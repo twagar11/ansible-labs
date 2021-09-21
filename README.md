@@ -1,5 +1,20 @@
 # ansible-labs
 
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ansible_logo.svg/200px-Ansible_logo.svg.png)
+
+
+## Lab Environment
+
+Instructor will provide access to lab environment
+
+
+## Labs
+
+### Install and Setup
+
+* __INSTALL__ : [Setup ansible control center](Install-Ansible.md)
+* __Inventory__ : [Setup inventory](Configure-Inventory.md)
+
 
 1. [Getting Started](1-getting-started.md)
 2. [Ansible Fundamental](2-ansible-fundamentals.md)
