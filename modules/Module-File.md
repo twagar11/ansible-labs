@@ -20,6 +20,7 @@ Optional arguments:
 - `owner`, the owner user on hosts
 - `group`, the owner group on hosts
 - `state`, to remove, or create folder/file on hosts.
+- `mode`, to set permissions on your files
 
 default template looks like:
 
@@ -195,7 +196,6 @@ $ ansible webserver -m copy -a "src=~/test/ dest=~/test"
 
 **NOTE:** notice that we are not mentioning a specific file thus copying everything inside the directory.
 
-
 login to each host, to verify the folder and file
 
 ## Step 4 - Delete Directory
@@ -209,11 +209,9 @@ $ ansible webserver -m file -a "dest=~/test state=absent"
 ## Step 5 - Practice
 
 using what you just learned, try to:
+
 - create a directory in `~/<Your-Name>/<Your-Family>`
 - create two `txt` files inside the directory and write your email and name into them
 - use ansible to push all these files to your hosts
-
-
-
 
 ## Well done! 👏
