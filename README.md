@@ -10,6 +10,12 @@ Instructor will provide access to lab environment
 
 In the labs term `C&C` means `Control Center`
 
+## Requirements
+
+- All these labs are for ansible, your instructor will review UNIX commands with you before working on ansible
+- Ansible uses `YAML` files, your instructor will cover and talk about how to create a yaml file with you
+- At the time of writing this lab, there are over 3000 modules, we will only cover some of them as an example.
+
 ## Labs
 
 ### Install and Setup
@@ -22,6 +28,7 @@ In the labs term `C&C` means `Control Center`
 * __PING__ : [Ping Hosts](modules/Module-Ping.md)
 * __FACTS__ : [Facts](modules/Module-Facts.md)
 * __FILE__ : [File/folder manipulations](modules/Module-Facts.md)
+* __APT__ : [APT ](modules/Module-apt.md)
 
 1. [Getting Started](1-getting-started.md)
 2. [Ansible Fundamental](2-ansible-fundamentals.md)
