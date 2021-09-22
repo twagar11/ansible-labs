@@ -106,7 +106,7 @@ We could add trailing spaces to the preceding example to stop the words from run
 
 One additional example is provided in the following code block of a [variables] file for you to consider, which shows the various examples we have covered all in one place:
 
-- Inspect [Employee With Blocks](employees_with_blocks.yml)
+- Inspect [Employee With Blocks](employee.json)
 
 ## Practices
 
