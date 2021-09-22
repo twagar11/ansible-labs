@@ -7,7 +7,7 @@ tidy and easy on the eye. In addition, there are libraries available in most pro
 
 Before you starting, inspect the original `JSON` file that we are going to convert to `YAML`
 
-- Inspect [Employee.json](employees.json)
+- Inspect [Employee.json](employee.json)
 
 Let's explore the YAML language :
 
