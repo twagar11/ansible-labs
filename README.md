@@ -2,14 +2,13 @@
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ansible_logo.svg/200px-Ansible_logo.svg.png)
 
-
 ## Lab Environment
 
 Instructor will provide access to lab environment
 
 ## Note
 
-In the labs term `C&C` means `Control Center` 
+In the labs term `C&C` means `Control Center`
 
 ## Labs
 
@@ -19,8 +18,10 @@ In the labs term `C&C` means `Control Center`
 * __Inventory__ : [Setup inventory](setup/Configure-Inventory.md)
 
 ### Modules
+
 * __PING__ : [Ping Hosts](modules/Module-Ping.md)
-* __FACTS__ : [Facts Hosts](modules/Module-Facts.md)
+* __FACTS__ : [Facts](modules/Module-Facts.md)
+* __FILE__ : [File/folder manipulations](modules/Module-Facts.md)
 
 1. [Getting Started](1-getting-started.md)
 2. [Ansible Fundamental](2-ansible-fundamentals.md)
