@@ -88,7 +88,7 @@ note the following part
 ```
 
 This means
-- C&C is can connect to the hosts
+- C&C can connect to the hosts
 - nothing is changed on the hosts
 
 
