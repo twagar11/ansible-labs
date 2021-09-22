@@ -7,6 +7,9 @@
 
 Instructor will provide access to lab environment
 
+## Note
+
+In the labs term `C&C` means `Control Center` 
 
 ## Labs
 
@@ -15,6 +18,8 @@ Instructor will provide access to lab environment
 * __INSTALL__ : [Setup ansible control center](Install-Ansible.md)
 * __Inventory__ : [Setup inventory](Configure-Inventory.md)
 
+### Modules
+* __PING__ : [Ping Hosts](Module-Ping.md)
 
 1. [Getting Started](1-getting-started.md)
 2. [Ansible Fundamental](2-ansible-fundamentals.md)
