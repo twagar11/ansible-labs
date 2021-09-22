@@ -20,6 +20,7 @@ In the labs term `C&C` means `Control Center`
 
 ### Modules
 * __PING__ : [Ping Hosts](modules/Module-Ping.md)
+* __FACTS__ : [Facts Hosts](modules/Module-Facts.md)
 
 1. [Getting Started](1-getting-started.md)
 2. [Ansible Fundamental](2-ansible-fundamentals.md)
