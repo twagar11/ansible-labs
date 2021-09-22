@@ -18,7 +18,7 @@ In the labs term `C&C` means `Control Center`
 
 ## Labs
 
-#Day 1
+# Day 1
 
 ### Install and Setup
 
