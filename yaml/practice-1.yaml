@@ -1,0 +1,15 @@
+---
+accounting:
+  - age: 23
+    firstName: John
+    lastName: Doe
+  - age: 32
+    firstName: Mary
+    lastName: Smith
+sales:
+  - age: 27
+    firstName: Sally
+    lastName: Green
+  - age: 41
+    firstName: Jim
+    lastName: Galley
