@@ -18,6 +18,8 @@ In the labs term `C&C` means `Control Center`
 
 ## Labs
 
+#Day 1
+
 ### Install and Setup
 
 * __INSTALL__ : [Setup ansible control center](setup/Install-Ansible.md)
@@ -30,12 +32,6 @@ In the labs term `C&C` means `Control Center`
 * __FILE__ : [File/folder manipulations](modules/Module-Facts.md)
 * __APT__ : [APT ](modules/Module-apt.md)
 
-1. [Getting Started](1-getting-started.md)
-2. [Ansible Fundamental](2-ansible-fundamentals.md)
-3. [Defining Inventory](3-defining-inventory.md)
-4. [Playbooks and Roles](4-playbooks-and-roles.md)
-5. [Modules](5-modules.md)
-6. [Plugins](6-plugins.md)
-7. [Coding Best Practices](7-coding-best-practices.md)
-8. [Advanced Topics](8-advanced-topics.md)
-9. [Testing](9-testing.md)
+### YAML
+
+* __YAML__ : [Writing YAML file](yaml/README.md)
