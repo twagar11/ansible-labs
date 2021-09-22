@@ -22,8 +22,10 @@ In the labs term `C&C` means `Control Center`
 
 ### Install and Setup
 
-* __INSTALL__ : [Setup ansible control center](setup/Install-Ansible.md)
+* __Install__ : [Setup ansible control center](setup/Install-Ansible.md)
 * __Inventory__ : [Setup inventory](setup/Configure-Inventory.md)
+* __Inventory(Best Practice)__ : [Setup inventory file](setup/Configure-Inventory-File.md)
+
 
 ### Modules
 
