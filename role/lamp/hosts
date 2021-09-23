@@ -1,0 +1,15 @@
+[webservers]
+w1.internal.local ansible_ssh_pass=i-0efbe92a671b8a767
+w2.internal.local ansible_ssh_pass=i-082c7a68ed497c29b
+
+[webservers:vars]
+ansible_user=ubuntu
+
+
+[appserver]
+a1.internal.local  ansible_ssh_pass=i-04070f6c43185b377
+a2.internal.local  ansible_ssh_pass=i-0fd42dab3cfb4eb65
+
+[appserver:vars]
+ansible_user=ubuntu
+

@@ -8,13 +8,12 @@
 
     - name: Install apache and php
       apt:
-        name: "{{ item }}"
-        state: present
-      with_items:
+        name:
           - apache2
           - php
           - php-mysql
           - git
+        state: present
 
     - name: apache service state
       service:
@@ -29,13 +28,16 @@
   tasks:
     - name: Install Mysql Server
       apt:
-        name: "{{ item }}"
+        name:
+          - mysql-server
+          - python3-pip
+          - git
         state: present
-      with_items:
-        - mysql-server
-        - MySQL-python
-        - libsemanage-python
-        - git
+
+    - name: Install the python module
+      pip:
+        name: MYSQL-python
+        state: present
 
 
     - name: Mysql Service
