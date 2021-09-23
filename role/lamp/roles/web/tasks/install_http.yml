@@ -1,0 +1,17 @@
+---
+# These tasks will install apache and php on our server
+
+- name: Install apache and php
+  apt:
+    name:
+      - apache2
+      - php
+      - php-mysql
+      - git
+    state: present
+
+- name: apache service state
+  service:
+    name: apache2
+    state: started
+    enabled: yes
