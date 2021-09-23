@@ -1,0 +1,18 @@
+---
+
+- hosts: webserver
+  become: yes
+  become_user: root
+
+
+
+  tasks:
+    - name: Install packages with loop
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - htop
+        - git
+
+
