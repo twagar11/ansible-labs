@@ -1,0 +1,28 @@
+---
+
+- hosts: webserver
+  become: yes
+  become_user: root
+  gather_facts: no
+
+
+  vars:
+    pkgname: nginx
+    trivera_tech: Andy
+
+
+  tasks:
+    - name: Install "{{ pkgname }}"
+      apt:
+        name: "{{ pkgname }}"
+        state: present
+
+    - name: Print Some variables
+      debug:
+        msg: "Hello, {{ trivera_tech }}"
+
+    - name: Remove "{{ pkgname }}"
+      apt:
+        name: "{{ pkgname }}"
+        state: absent
+        autoremove: yes

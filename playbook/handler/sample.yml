@@ -1,0 +1,26 @@
+---
+
+- hosts: webserver
+  become: yes
+  become_user: root
+  gather_facts: no
+
+
+  vars:
+    pkgname: apache2
+
+
+  tasks:
+    - name: Install "{{ pkgname }}"
+      apt:
+        name: "{{ pkgname }}"
+        state: present
+      notify:
+        - Restart "{{ pkgname }}"
+
+
+  handlers:
+    - name: Restart "{{ pkgname }}"
+      service:
+        name: "{{ pkgname }}"
+        state: restarted
