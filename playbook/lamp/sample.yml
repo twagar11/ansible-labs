@@ -1,0 +1,52 @@
+---
+
+- hosts: webserver
+  become: yes
+  become_user: root
+
+  tasks:
+
+    - name: Install apache and php
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+          - apache2
+          - php
+          - php-mysql
+          - git
+
+    - name: apache service state
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+- hosts: appserver
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: Install Mysql Server
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - mysql-server
+        - MySQL-python
+        - libsemanage-python
+        - git
+
+
+    - name: Mysql Service
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+
+
+    - name: Create a new database with name 'bobdata'
+      mysql_db:
+        name: bobdata
+        state: present
+
