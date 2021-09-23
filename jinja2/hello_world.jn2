@@ -1,0 +1,17 @@
+{{ var_first_line }}
+lorem ipsum dolor sit amet, consectetur
+
+{% for i in range(2) %}
+This is a loop, and i'm the {{ i }}th iteration
+{% endfor %}
+
+{% for item in names %}
+{{ var_first_line }}, {{item}}
+{% endfor %}
+
+
+
+
+{{ var_second_line }}
+
+

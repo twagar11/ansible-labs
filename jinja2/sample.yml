@@ -1,0 +1,18 @@
+---
+
+- hosts: webserver
+
+
+  vars:
+    var_first_line: Hello
+    var_second_line: Goodbye
+    names: ['John','Jane','Sarah','Tim']
+
+
+  tasks:
+    - name: Ansible Jinja2 Template
+      template:
+        src: hello_world.jn2
+        dest: ~/hello_r.txt
+
+
