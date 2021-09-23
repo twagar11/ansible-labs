@@ -31,12 +31,14 @@
         name:
           - mysql-server
           - python3-pip
+          - python3-dev
+          - libmysqlclient-dev
           - git
         state: present
 
     - name: Install the python module
       pip:
-        name: MYSQL-python
+        name: mysqlclient
         state: present
 
 
