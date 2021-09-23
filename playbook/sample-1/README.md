@@ -1,4 +1,4 @@
-<link rel='stylesheet' href='../assets/css/main.css'/>
+<link rel='stylesheet' href='../../assets/css/main.css'/>
 
 # Overview
 
@@ -10,7 +10,7 @@ In this lab, You will create a simple playbook that will install apache2 on your
 
 ## Step 1 - Playbook
 
--Inspect [playbook](apache-playbook.yaml)
+- Inspect [playbook](apache-playbook.yaml)
 
 
 
