@@ -1,0 +1,12 @@
+---
+
+- name: Deploy apache
+  hosts: webserver
+  become: yes
+  become_user: root
+
+  roles:
+    - apache
+    - php
+    - database
+    - wordpress
