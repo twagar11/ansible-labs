@@ -1,0 +1,27 @@
+
+- name: Install Mysql Server
+  apt:
+    name:
+      - mysql-server
+      - python3-pip
+      - python3-dev
+      - libmysqlclient-dev
+      - git
+    state: present
+
+- name: Install the python module
+  pip:
+    name: mysqlclient
+    state: present
+
+
+- name: Mysql Service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: Create a new database with name 'bobdata'
+  mysql_db:
+    name: bobdata
+    state: present

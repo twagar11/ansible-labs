@@ -1,0 +1,4 @@
+- name: Copy PHP File to server
+  template:
+      src: index.php.j2
+      dest: /var/www/html/index.php
