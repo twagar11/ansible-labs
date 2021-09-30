@@ -35,7 +35,7 @@ inventory created in Lab 3 (unless stated otherwise):
 
 
 ```ini
-`frontends`
+[frontends]
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
