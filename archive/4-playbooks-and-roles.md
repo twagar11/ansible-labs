@@ -164,6 +164,27 @@ Let's change the default Apache port using template as port 80 is already in use
 ```
 
 
+You will also need a `template.j2` file: 
+
+```j2
+# If you just change the port or add more ports here, you will likely also
+# have to change the VirtualHost statement in
+# /etc/apache2/sites-enabled/000-default.conf
+
+Listen 81
+
+<IfModule ssl_module>
+        Listen 443
+</IfModule>
+
+<IfModule mod_gnutls.c>
+        Listen 443
+</IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+
+
 **Note:** Make sure that apache2 is intalled before running the playbook: `service apache2 status`
 
 You can install apache2 by running `apt-get install -y apache2`. It can also installed by running following playbook:
