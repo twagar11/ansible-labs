@@ -360,7 +360,7 @@ record of how it was done for you to refer to later on. There are
 multiple ways to do this, but consider the following as an example:
 
 ```
- -- 
+--- 
 - name: Install Apache
   hosts: frt01.example.com
   gather_facts: no
@@ -409,7 +409,7 @@ meanings: **plays** and **tasks**.
 
 
 Defining plays and tasks
- --  --  --  --  --  --  --  -- 
+---  --  --  --  --  --  --  -- 
 
 Suppose we want to write a single playbook to configure both the frontend
 servers and the application servers. We could use two separate playbooks
@@ -428,7 +428,7 @@ started with building up our playbook:
     set up the Apache server on the front end, as shown here:
 
 ```
- -- 
+--- 
 - name: Play 1 - configure the frontend servers
   hosts: frontends
   become: yes
@@ -615,7 +615,7 @@ $ mkdir -p roles/installapache/tasks
     condition to determine which of the tasks files to import:
 
 ```
- -- 
+--- 
 - name: import a tasks based on OS platform 
   import_tasks: centos.yml 
   when: ansible_distribution == 'CentOS' 
@@ -629,7 +629,7 @@ $ mkdir -p roles/installapache/tasks
     content:
 
 ```
- -- 
+--- 
 - name: Install Apache using apt
   apt:
     name: "apache2"
@@ -646,7 +646,7 @@ $ mkdir -p roles/installapache/tasks
     Notice how the content differs between CentOS and Ubuntu hosts:
 
 ```
- -- 
+--- 
 - name: Install Apache using apt
   apt:
     name: "apache2"
@@ -667,7 +667,7 @@ dictates that this file be called [site.yml], but you are free to
 call it whatever you like:
 
 ```
- -- 
+--- 
 - name: Install Apache using a role
   hosts: frontends
   become: true
@@ -739,7 +739,7 @@ playbook. The roles directory structure including both the
 similar manner as in the preceding example:
 
 ```
- --  
+---  
 - name: Play to import and include a role
   hosts: frontends
   
@@ -753,7 +753,7 @@ similar manner as in the preceding example:
 
 
 Setting up role-based variables and dependencies
- --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- 
+---  --  --  --  --  --  --  --  --  --  --  --  --  --  --  -- 
 
 
 Roles based variables can go in one of two locations:
@@ -775,7 +775,7 @@ We shall see examples of both of these as we build our example:
     contains the following code:
 
 ```
- -- 
+--- 
 - name: Role variables and meta playbook
   hosts: frt01.example.com
 
@@ -798,7 +798,7 @@ Inside this directory, create a file called [main.yml] with the
 following contents:
 
 ```
- -- 
+--- 
 dependencies:
 - role: linuxtype
   vars:
@@ -826,7 +826,7 @@ Again, create a [main.yml] file in the [meta] directory, but
 this time containing the following:
 
 ```
- -- 
+--- 
 dependencies:
 - role: version
 - role: network
@@ -848,7 +848,7 @@ In the [meta] directory, we\'ll create a [main.yml] file
 with the following contents:
 
 ```
- -- 
+--- 
 allow_duplicates: true
 ```
 
@@ -865,7 +865,7 @@ directory, which prints the value of the `type` variable that gets
 passed to the role:
 
 ```
- -- 
+--- 
 - name: Print type variable
   debug:
     var: type
@@ -884,7 +884,7 @@ In the [meta] directory, we\'ll again create
 a [main.yml] file with the following contents:
 
 ```
- -- 
+--- 
 allow_duplicates: true
 ```
 
@@ -893,7 +893,7 @@ directory, which prints the value of the `type` variable that gets
 passed to the role:
 
 ```
- -- 
+--- 
 - name: Print type variable
   debug:
     var: type
@@ -984,7 +984,7 @@ overwritten. To do this, change the contents of
 the [roles/platform/meta/main.yml] file to the following:
 
 ```
- -- 
+--- 
 dependencies:
 - role: linuxtype
   type: centos
@@ -1045,7 +1045,7 @@ available Ansible roles  --  Ansible Galaxy.
 
 
 Ansible Galaxy
- --  --  --  -- --
+---  --  --  -- --
 
 No section on Ansible roles would be complete without a mention of
 Ansible Galaxy. Ansible Galaxy is a community-driven collection of
@@ -1154,7 +1154,7 @@ Let\'s define the task that will perform our update but add a
 example playbook:
 
 ```
- -- 
+--- 
 - name: Play to patch only CentOS systems
   hosts: all
   become: true
@@ -1204,7 +1204,7 @@ this case, we can expand the logic in our playbook to check both the
 distribution and major version, as follows:
 
 ```
- -- 
+--- 
 - name: Play to patch only Ubuntu systems
   hosts: all
   become: true
@@ -1256,7 +1256,7 @@ only on the condition that the [hosts] string is in the output of
 the [shell] command:
 
 ```
- -- 
+--- 
 - name: Play to patch only CentOS systems
   hosts: localhost
   become: true
@@ -1400,7 +1400,7 @@ extended to adding user accounts or creating a sequence of files).
 Consider the following code:
 
 ```
- -- 
+--- 
 - name: Simple loop demo play
   hosts: frt01.example.com
 
@@ -1450,7 +1450,7 @@ section with loops, to make the loop operate on just a subset of its
 data. For example, consider the following iteration of the playbook:
 
 ```
- -- 
+--- 
 - name: Simple loop demo play
   hosts: frt01.example.com
 
@@ -1502,7 +1502,7 @@ Hence, let\'s see what happens if we further enhance the playbook, as
 follows:
 
 ```
- -- 
+--- 
 - name: Simple loop demo play
   hosts: frt01.example.com
 
@@ -1585,7 +1585,7 @@ intending to use this playbook in a nested loop, we\'ll use the
 contents variable from [item] to [second\_item]:
 
 ```
- -- 
+--- 
 - name: Play to demonstrate nested loops
   hosts: localhost
 
@@ -1608,7 +1608,7 @@ file is very much like a tasks file in a role -- it is not a complete
 playbook, but rather simply a list of tasks:
 
 ```
- -- 
+--- 
 - name: Inner loop
   debug:
     msg: "second item={{ second_item }} first item={{ item }}"
@@ -1736,7 +1736,7 @@ discussed contained in a block (notice the additional level of
 indentation required to denote their presence in the block):
 
 ```
- -- 
+--- 
 - name: Conditional block play
   hosts: all
   become: true
@@ -1817,7 +1817,7 @@ playbook.
 Let\'s create a new playbook, this time with the following contents:
 
 ```
- -- 
+--- 
 - name: Play to demonstrate block error handling
   hosts: frontends
 
@@ -1919,7 +1919,7 @@ debug] and [debugger: on\_failed] statements in the play
 definition:
 
 ```
- -- 
+--- 
 - name: Play to demonstrate the debug strategy
   hosts: frt01.example.com
   strategy: debug
