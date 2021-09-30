@@ -100,7 +100,7 @@ Let\'s see how our newly created playbook behaves when we run it:
 ```console
 $ ansible-playbook -i hosts myplaybook.yaml
 
-PLAY `frontends` ***************************************************************
+PLAY frontends ***************************************************************
 
 TASK [Gathering Facts] *********************************************************
 ok: [frt02.example.com]
@@ -565,7 +565,7 @@ need an inventory, so let\'s reuse the inventory we used in the previous
 section (included in the following for convenience):
 
 ```
-`frontends`
+[frontends]
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
@@ -1126,7 +1126,7 @@ As ever, we\'ll need an inventory to get started, and we\'ll reuse the
 inventory we have used throughout this lab:
 
 ```
-`frontends`
+[frontends]
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
@@ -1366,7 +1366,7 @@ use our by-now familiar inventory, which we have consistently used
 throughout this lab:
 
 ```
-`frontends`
+[frontends]
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
@@ -1698,7 +1698,7 @@ examples in this lab to get you up to speed with blocks in Ansible.
 As ever, let\'s ensure we have an inventory to work from:
 
 ```
-`frontends`
+[frontends]
 frt01.example.com https_port=8443
 frt02.example.com http_proxy=proxy.example.com
 
