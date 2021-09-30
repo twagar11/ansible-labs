@@ -1781,6 +1781,13 @@ indentation required to denote their presence in the block):
     when: ansible_facts['distribution'] == 'Fedora'
 ```
 
+This also refers to a template file called `templates/src.j2`.  You can create this file as follows
+
+
+```j2
+Hello World!
+```
+
 When you run this playbook, you should find that the Apache-related
 tasks are only run on any Fedora hosts you might have in your inventory;
 you should see that either all three tasks are run or are
