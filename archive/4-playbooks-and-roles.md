@@ -70,7 +70,7 @@ Let\'s dive right in and get started writing a playbook.
     we\'ll ignore that for now):
 
 ```yaml
- -- 
+--- 
 - hosts: frontends
   remote_user: ubuntu
 
@@ -143,7 +143,7 @@ Let's change the default Apache port using template as port 80 is already in use
 
 
 ```yaml
- -- 
+--- 
 - name: Handler demo 1
   hosts: frt01.example.com
   gather_facts: no
@@ -247,7 +247,7 @@ also call multiple handlers by setting a common name for using the
 following example:
 
 ```yaml
- -- 
+--- 
 - name: Handler demo 1
   hosts: frt01.example.com
   gather_facts: no
