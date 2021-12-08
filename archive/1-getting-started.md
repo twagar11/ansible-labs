@@ -232,7 +232,7 @@ this step will give errors due to the lock file bein present.
 Otherwise, Install the [apache2] package with [apt] if it is not already present---if it is present, do not update it. Again, this applies to all hosts in the [frontends] inventory group:
 
 ```bash
-ansible frontends -m apt -a "name=apache2 state=present"
+ansible frontends -m apt -a  "name=apache2 state=present" -b
 ```
 
 ## Get Latest package
