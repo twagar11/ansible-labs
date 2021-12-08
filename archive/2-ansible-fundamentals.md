@@ -813,7 +813,7 @@ appserver2-emea.example.com : ok=2 changed=0 unreachable=0 failed=0 skipped=0 re
 
 ```
 ---
-- import_playbook: frontend-na.yml
+- import_playbook: frontends-na.yml
 - import_playbook: appserver-emea.yml
 ```
 
