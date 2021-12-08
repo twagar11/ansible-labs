@@ -24,6 +24,7 @@ The lab is refers to hosts that need to be referenced in the apache
 You will need to add the following hosts, which should link to the second machine's ip address you were given
   * backend1.example.com
   * frontend1.example.com
+  * frontend2.example.com
   * frontend1-na.example.com
   * frontend2-na.example.com
   * frontend1-emea.example.com
@@ -52,6 +53,7 @@ With these contents:
 
 <YOUR_IP_ADDRESS> backend1.example.com
 <YOUR_IP_ADDRESS> frontend1.example.com
+<YOUR_IP_ADDRESS> frontend2.example.com
 
 <YOUR_IP_ADDRESS> frontend1-na.example.com
 <YOUR_IP_ADDRESS> frontend2-na.example.com
