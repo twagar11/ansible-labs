@@ -225,7 +225,11 @@ ansible frontends -m file -a "dest=/home/ubuntu/new state=absent"
 ```
 
 ### Install apache2 package
-Install the [apache2] package with [apt] if it is not already present---if it is present, do not update it. Again, this applies to all hosts in the [frontends] inventory group:
+
+If you are running on a separate machine (the lab instructions above have you working on localhost) you can run the followoing command.  If you are aliasing localhost as we have suggested in this lab,
+this step will give errors due to the lock file bein present. 
+
+Otherwise, Install the [apache2] package with [apt] if it is not already present---if it is present, do not update it. Again, this applies to all hosts in the [frontends] inventory group:
 
 ```bash
 ansible frontends -m apt -a "name=apache2 state=present"
