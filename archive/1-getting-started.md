@@ -283,6 +283,7 @@ Also confirm that you have pip3 installed, if not, run the following:
 
 ```
 $ sudo apt install python3-pip
+$ sudo update-alternatives --install  /usr/bin/python python /usr/bin/python3
 ```
 
 
