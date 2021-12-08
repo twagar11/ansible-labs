@@ -71,6 +71,11 @@ With these contents:
 
 You should confirm that you have passwordless connectivity for each of your newa machines
 
+If not you can run the following command:
+
+```bash
+ssh-copy-id ubuntuaYOUR_SECOND_MACHINE
+```
 
 
 
