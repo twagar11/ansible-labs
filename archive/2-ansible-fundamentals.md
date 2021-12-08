@@ -74,7 +74,7 @@ You should confirm that you have passwordless connectivity for each of your newa
 If not you can run the following command:
 
 ```bash
-ssh-copy-id ubuntuaYOUR_SECOND_MACHINE
+ssh-copy-id ubuntu@YOUR_SECOND_MACHINE
 ```
 
 
