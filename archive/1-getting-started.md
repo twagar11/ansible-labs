@@ -89,7 +89,7 @@ We are going to be creating some hosts in `/etc/hosts` file to test with ansible
 First, edit (as sudo) the `/etc/hosts` file with a commmand line editor such as `vim` or `nano`.
 
 ```bash
-sudo vi /etc/hosts/
+sudo vi /etc/hosts
 ```
 
 Add the following lines to the file `/etc/hosts`

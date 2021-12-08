@@ -43,6 +43,26 @@ to keep commands as simple as possible, we'll use `nano`
 $ sudo apt-get install nano -y
 ```
 
+
+## Confirm passwordless ssh
+
+
+You should be able to `ssh` to localhost, as follows:
+
+```bash
+ssh localhost  # you may have to type in yes when asking for a key
+exit
+```
+
+If this does not work, you need to configure the key for passwordless ssh to localhost
+
+```bash
+ssh-keygen -t rsa # Press enter for each line
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod og-wx ~/.ssh/authorized_keys
+```
+
+
 ## Step 3 - Add Groups
 
 We need to add our new hosts to our `/etc/ansible/hosts` file
