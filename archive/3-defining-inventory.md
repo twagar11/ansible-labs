@@ -11,7 +11,7 @@ In this lab, we will cover the following topics:
 
 All lab file are present at below path. Run following command in the terminal first before running commands in the lab:
 
-`cd ~/ansible-course/Lab_3` 
+`cd ~/ansible-labs/Lab_3` 
 
 
 
@@ -61,7 +61,7 @@ flag to specify the location of the inventory file if not using the
 default. Hypothetically, this might look like the following example:
 
 ```bash
-ansible -i /home/ubuntu/ansible-course/Lab_3/my_inventory all -m ping
+ansible -i /home/ubuntu/ansible-labs/Lab_3/my_inventory all -m ping
 ```
 
 
@@ -115,7 +115,7 @@ ungrouped:
 **Note:** You can copy file from lab_3 folder as well.
 
 ```bash
-cd ~/ansible-course/Lab_3 
+cd ~/ansible-labs/Lab_3 
 sudo cp my_inventory.yaml /etc/ansible/
 ```
 
@@ -245,7 +245,7 @@ all:
 **Note:** You can copy inventory file from lab_3 folder as well.
 
 ```bash
-cd ~/ansible-course/Lab_3 
+cd ~/ansible-labs/Lab_3 
 sudo cp hostgroups-yml /etc/ansible/my_inventory.yaml
 ```
 
@@ -558,7 +558,7 @@ $  tree
     happens:
 
 ```console
-$ cd /home/ubuntu/ansible-course/Lab_3/vartree
+$ cd /home/ubuntu/ansible-labs/Lab_3/vartree
 $ ansible -i inventory frontends -m debug -a "msg=\"Connecting to {{ lb_vip }}, listening on {{ https_port }}\""
 
 frt02.example.com | SUCCESS => {
@@ -656,7 +656,7 @@ Now, let\'s run an ad hoc command to see what value of `testvar`
 is actually set:
 
 ```console
-$ cd /home/ubuntu/ansible-course/Lab_3
+$ cd /home/ubuntu/ansible-labs/Lab_3
 $ ansible -i hostgroups-children-vars-ini ubuntu -m debug -a "var=testvar"
 
 frt01.example.com | SUCCESS => {
