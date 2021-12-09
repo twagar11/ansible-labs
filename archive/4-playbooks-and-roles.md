@@ -700,13 +700,14 @@ call it whatever you like:
 For clarity, your final directory structure should look like this:
 
 ```
-.
+
+role_example1/
 ├── roles
-│   └── installapache
-│   └── tasks
-│   ├── centos.yml
-│   ├── main.yml
-│   └── ubuntu.yml
+│   └── installapache
+│       └── tasks
+│           ├── centos.yml
+│           ├── main.yml
+│           └── ubuntu.yml
 └── site.yml
 ```
 
