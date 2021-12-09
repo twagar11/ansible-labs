@@ -16,7 +16,7 @@ Specifically, in this lab, we will cover the following topics:
 
 All lab file are present at below path. Run following command in the terminal first before running commands in the lab:
 
-`cd ~/ansible-course/Lab_4` 
+`cd ~/ansible-labs/Lab_4` 
 
 
 Understanding the playbook framework
@@ -190,7 +190,7 @@ Listen 81
 You can install apache2 by running `apt-get install -y apache2`. It can also installed by running following playbook:
 
 ```console
-$ cd ~/ansible-course/Lab_2
+$ cd ~/ansible-labs/Lab_2
 $ ansible-playbook update-apache-version.yml
 ```
 
@@ -715,7 +715,7 @@ using [ansible-playbook] in the normal way -- you should see output
 similar to this:
 
 ```console
-$ cd ~/ansible-course/Lab_4/role-example1
+$ cd ~/ansible-labs/Lab_4/role-example1
 $ ansible-playbook -i hosts site.yml
 
 PLAY [Install Apache using a role] *********************************************
@@ -785,7 +785,7 @@ Roles based variables can go in one of two locations:
 
 **Note:** Complete example is available at:
 
-`cd ~/ansible-course/Lab_4/role-example2` 
+`cd ~/ansible-labs/Lab_4/role-example2` 
 
 
 We shall see examples of both of these as we build our example:
