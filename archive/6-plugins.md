@@ -18,7 +18,7 @@ In this lab, we will cover the following topics:
 
 All lab file are present at below path. Close all terminals and run following command in the **new**  terminal first before running commands in the lab:
 
-`cd ~/ansible-course/Lab_6` 
+`cd ~/ansible-labs/Lab_6` 
 
 
 Discovering the plugin types
@@ -350,7 +350,7 @@ all goes well, it should look something like the following:
 
 
 ```console
-$ cd ~/ansible-course/Lab_6/
+$ cd ~/ansible-labs/Lab_6/
 $ ansible-playbook -i hosts myplugin.yml
 
 
@@ -602,7 +602,7 @@ plugin directories.
     directory in the source code you just cloned:
 
 ```console
-$ cp ~/ansible-course/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugins/filter/
+$ cp ~/ansible-labs/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugins/filter/
 ```
 
 2.  Similarly, our custom `lookup` plugin would go in the
@@ -610,7 +610,7 @@ $ cp ~/ansible-course/Lab_6/filter_plugins/custom_filter.py ./lib/ansible/plugin
     following:
 
 ```console
-$ cp ~/ansible-course/Lab_6/lookup_plugins/firstchar.py ./lib/ansible/plugins/lookup/
+$ cp ~/ansible-labs/Lab_6/lookup_plugins/firstchar.py ./lib/ansible/plugins/lookup/
 ```
 
 Armed with this knowledge, you should now be well placed to begin your

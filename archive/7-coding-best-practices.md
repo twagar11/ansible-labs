@@ -16,7 +16,7 @@ In this lab, we will cover the following topics:
 
 All lab file are present at below path. Run following command in the terminal first before running commands in the lab:
 
-`cd ~/ansible-course/Lab_7` 
+`cd ~/ansible-labs/Lab_7` 
 
 
 ## The preferred directory layout
@@ -31,7 +31,7 @@ consistency and for testing purposes).
 
 Let\'s get started by building the directory structure:
 
-**Note:** Complete solution is avaialble at: `cd ~/ansible-course/Lab_7/best-practise-directory-structure`
+**Note:** Complete solution is avaialble at: `cd ~/ansible-labs/Lab_7/best-practise-directory-structure`
 
 
 1.  Create a directory tree for your development inventory with the
@@ -220,7 +220,7 @@ Now, we can simply run our playbook in the normal manner. For example,
 to run it on the development inventory, execute the following:
 
 ```
-$ cd ~/ansible-course/Lab_7/best-practise-directory-structure
+$ cd ~/ansible-labs/Lab_7/best-practise-directory-structure
 $ ansible-playbook -i inventories/development/hosts site.yml
 
 PLAY [Play using best practise directory structure] ****************************
@@ -327,7 +327,7 @@ concepts by building on the more complete example we covered in the *The
 preferred directory layout* section of this lab:
 
 
-**Note:** Complete solution is avaialble at: `cd ~/ansible-course/Lab_7/variable-precedence-1`
+**Note:** Complete solution is avaialble at: `cd ~/ansible-labs/Lab_7/variable-precedence-1`
 
 
 1.  Create an inventory directory structure with the following commands:
@@ -375,7 +375,7 @@ http_port: 8080
     only defined in one place) takes the value we would expect:
 
 ```
-$ cd ~/ansible-course/Lab_7/variable-precedence-1
+$ cd ~/ansible-labs/Lab_7/variable-precedence-1
 $ ansible-playbook -i inventories/development/hosts site.yml
 
 
@@ -416,7 +416,7 @@ http_port: 8081
     follows:
 
 ```
-$ cd ~/ansible-course/Lab_7/variable-precedence-2
+$ cd ~/ansible-labs/Lab_7/variable-precedence-2
 $ ansible-playbook -i inventories/development/hosts site.yml
 
 PLAY [Play using best practise directory structure] ****************************
@@ -485,7 +485,7 @@ http_port: 8083
     Let\'s rerun our playbook and see which value comes through:
 
 ```
-$ cd ~/ansible-course/Lab_7/variable-precedence-3
+$ cd ~/ansible-labs/Lab_7/variable-precedence-3
 $ ansible-playbook -i inventories/development/hosts site.yml
 
 PLAY [Play using best practise directory structure] ****************************
@@ -533,7 +533,7 @@ http_port: 9090
     group variable from the [newcentos] group---won:
 
 ```
-$ cd ~/ansible-course/Lab_7/variable-precedence-4
+$ cd ~/ansible-labs/Lab_7/variable-precedence-4
 $ ansible-playbook -i inventories/development/hosts site.yml
 
 PLAY [Play using best practise directory structure] ****************************

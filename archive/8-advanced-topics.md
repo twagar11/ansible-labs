@@ -1,4 +1,4 @@
-# Lab 8. Advanced Ansible Topics
+ Lab 8. Advanced Ansible Topics
 
 
 In this lab, we will cover the following topics:
@@ -19,7 +19,7 @@ In this lab, we will cover the following topics:
 
 All lab file are present at below path. Run following command in the terminal first before running commands in the lab:
 
-`cd ~/ansible-course/Lab_8` 
+`cd ~/ansible-labs/Lab_8` 
 
 ### Pre-req:
 

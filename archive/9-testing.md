@@ -19,7 +19,7 @@ There are a bunch of different ways to prevent or mitigate a bug in Ansible play
 
 All lab file are present at below path. Run following command in the terminal first before running commands in the lab:
 
-`cd ~/ansible-course/Lab_9` 
+`cd ~/ansible-labs/Lab_9` 
 
 
 Digging into playbook execution problems
