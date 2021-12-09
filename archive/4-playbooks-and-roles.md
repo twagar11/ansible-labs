@@ -1193,7 +1193,7 @@ mine are), you should see output similar to the following:
 
 ```console
 
-$ cd ~/ansible-course/Lab_4
+$ cd ~/ansible-labs/Lab_4
 $ ansible-playbook -i hosts condition.yml
 
 PLAY [Play to patch only CentOS systems] ***************************************
@@ -1655,9 +1655,9 @@ TASK [Gathering Facts] *********************************************************
 ok: [localhost]
 
 TASK [Outer loop] **************************************************************
-included: /home/ubuntu/ansible-course/Lab_4/loopsubtask.yml for localhost
-included: /home/ubuntu/ansible-course/Lab_4/loopsubtask.yml for localhost
-included: /home/ubuntu/ansible-course/Lab_4/loopsubtask.yml for localhost
+included: /home/ubuntu/ansible-labs/Lab_4/loopsubtask.yml for localhost
+included: /home/ubuntu/ansible-labs/Lab_4/loopsubtask.yml for localhost
+included: /home/ubuntu/ansible-labs/Lab_4/loopsubtask.yml for localhost
 
 TASK [Inner loop] **************************************************************
 ok: [localhost] => (item=100) => {
@@ -1973,7 +1973,7 @@ $ ansible-playbook -i hosts debug.yml
 PLAY [Play to demonstrate the debug strategy] **********************************
 
 TASK [Generate an error by referencing an undefined variable] ******************
-fatal: [frt01.example.com]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'mobile' is undefined\n\nThe error appears to be in '/home/ubuntu/ansible-course/Lab_4/debug.yml': line 11, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n tasks:\n - name: Generate an error by referencing an undefined variable\n ^ here\n"}
+fatal: [frt01.example.com]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'mobile' is undefined\n\nThe error appears to be in '/home/ubuntu/ansible-labs/Lab_4/debug.yml': line 11, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n tasks:\n - name: Generate an error by referencing an undefined variable\n ^ here\n"}
 [frt01.example.com] TASK: Generate an error by referencing an undefined variable (debug)>
 
 
