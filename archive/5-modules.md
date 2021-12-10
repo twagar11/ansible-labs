@@ -22,7 +22,7 @@ Let\'s get started!
 
 All lab file are present at below path. Run following command in the terminal first before running commands in the lab:
 
-`cd ~/ansible-labs/Lab_5` 
+`cd ~/ansible-labs/archive/Lab_5` 
 
 
 Executing multiple modules using the command line
@@ -364,7 +364,7 @@ function from a Python library to copy a file locally on the target
 machine. Now, let\'s start coding our first module:
 
 
-**Note:** Complete solution/file is present in: `cd ~/ansible-labs/Lab_5` 
+**Note:** Complete solution/file is present in: `cd ~/ansible-labs/archive/Lab_5` 
 
 1.  Using vscode / vi editor, create a new file called (for example) [remote\_filecopy.py]:
 
@@ -615,8 +615,8 @@ $ . hacking/env-setup
 Copy solution file as show below:
 
 ```
-cp ~/ansible-labs/Lab_5/remote_filecopy.py ~/ansible/moduledev
-cp ~/ansible-labs/Lab_5/args.json ~/ansible/moduledev
+cp ~/ansible-labs/archive/Lab_5/remote_filecopy.py ~/ansible/moduledev
+cp ~/ansible-labs/archive/Lab_5/args.json ~/ansible/moduledev
 ```
 
 Now, you\'re finally ready to run your module for the first time. You
@@ -675,7 +675,7 @@ lines of code with the following:
 
 Copy solution file as show below:
 
-`cp ~/ansible-labs/Lab_5/better_remote_filecopy.py ~/ansible/moduledev`
+`cp ~/ansible-labs/archive/Lab_5/better_remote_filecopy.py ~/ansible/moduledev`
 
 
 Now, when we try and run the module with a non-existent source file, we
@@ -900,7 +900,7 @@ context that it will be viewed in.
 
 ### Ansible module in a Playbook!
 
-Close all terminals and open new terminal. Complete solution: `~/ansible-labs/Lab_5/testplaybook`
+Close all terminals and open new terminal. Complete solution: `~/ansible-labs/archive/Lab_5/testplaybook`
 
 It is easy to run our Ansible module in a
 playbook! By default, Ansible will check the playbook directory for a
@@ -949,7 +949,7 @@ testplaybook
 Now, try running the playbook in the usual manner and see what happens:
 
 ```
-$ cd ~/ansible-labs/Lab_5/testplaybook
+$ cd ~/ansible-labs/archive/Lab_5/testplaybook
 $ ansible-playbook -i hosts testplaybook.yml
 
 
