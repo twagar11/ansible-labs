@@ -31,7 +31,7 @@ In the labs term `C&C` means `Control Center`
 
 * __PING__ : [Ping Hosts](modules/Module-Ping.md)
 * __FACTS__ : [Facts](modules/Module-Facts.md)
-* __FILE__ : [File/folder manipulations](modules/Module-Facts.md)
+* __FILE__ : [File/folder manipulations](modules/Module-File.md)
 * __APT__ : [APT ](modules/Module-apt.md)
 
 ### YAML

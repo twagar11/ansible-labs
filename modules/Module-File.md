@@ -34,9 +34,9 @@ run the following command to create a file on `C&C`
 
 ```bash
 $ cd ~
-#create file
+#Create file
 $  touch hello.txt
-edit the file
+#Edit the file
 $ nano hello.txt 
 ```
 
@@ -93,8 +93,9 @@ note the status:
 CHANGED
 ```
 
-it means something on your hosts is changed,
-**NOTE:** ever file/folder that you put on your hosts that are without specified `user` or `group` takes the authenticated ones from your `hosts` file
+it means something on your hosts is changed.
+
+**NOTE:** every file/folder that you put on your hosts that are without specified `user` or `group` takes the authenticated ones from your `hosts` file
 
 Login to each host and verify that the file is there
 
