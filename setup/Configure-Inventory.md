@@ -44,7 +44,7 @@ $ sudo apt-get install nano -y
 ```
 
 
-## Confirm passwordless ssh
+## Confirm passwordless ssh (optional)
 
 
 You should be able to `ssh` to localhost, as follows:
@@ -126,14 +126,14 @@ In this scenario `ansible_ssh_pass` will be placed in front of each host with a 
 <IP 2>  ansible_ssh_pass=<Password>
 
 [webserver:vars]
-ansible_user=<Username>
+ansible_user=<Username> # ( ubuntu in our environment )
 
 [appserver]
 <IP 3> ansible_ssh_pass=<Password>
 <IP 4> ansible_ssh_pass=<Password>
 
 [appserver:vars]
-ansible_user=<Username>
+ansible_user=<Username> # ( ubuntu in our environment )
 
 
 ```
