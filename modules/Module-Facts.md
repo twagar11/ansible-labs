@@ -40,7 +40,7 @@ See the COPYING file for more information.
 Using "assword" as the default password prompt indicator.
 ```
 
-## Step 2 - getting to know the Module `hosts`
+## Step 2 - getting to know the Module `setup`
 
 `setup` module is used to pull config data from hosts
 
