@@ -42,7 +42,7 @@ Using "assword" as the default password prompt indicator.
 
 ## Step 2 - getting to know the Module `hosts`
 
-`hosts` module is used to pull config data from hosts
+`setup` module is used to pull config data from hosts
 
 default template looks like:
 
