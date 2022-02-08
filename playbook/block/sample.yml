@@ -1,0 +1,29 @@
+---
+
+- hosts: centosserver
+  become: yes
+  become_user: root
+  gather_facts: yes
+
+  tasks:
+    - name: Install, configure, and start Apache
+      block:
+        - name: Install httpd and memcached
+          yum:
+            name:
+              - httpd
+              - memcached
+            state: present
+
+        - name: Apply the foo config template
+          template:
+            src: templates/src.j2
+            dest: /etc/foo.conf
+
+        - name: Start service bar and enable it
+          ansible.builtin.service:
+            name: httpd
+            state: started
+            enabled: True
+      when: ansible_facts['distribution'] == 'CentOS'
+      ignore_errors: yes
