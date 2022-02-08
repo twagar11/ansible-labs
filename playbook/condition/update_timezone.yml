@@ -1,0 +1,29 @@
+---
+
+- hosts: webservers
+  become: yes
+  become_user: root
+  gather_facts: yes
+
+  vars:
+    timezone: Europe/UTC
+
+  tasks:
+
+    - name: Register a variable
+      shell: cat /etc/timezone
+      register: get_timezone
+
+    - name: print the variable
+      debug:
+        msg: "{{ get_timezone.stdout }}"
+
+    - name: set /etc/timezone
+      shell: echo "{{ timezone }}" > /etc/timezone
+      when: get_timezone.stdout.find('{{timezone}}') == -1
+      notify: update tzdata
+
+  handlers:
+    - name: update tzdata
+      debug:
+        msg: "Timezone has been Updated to {{ timezone }}"

@@ -1,0 +1,13 @@
+---
+
+- hosts: webservers
+  become: yes
+  become_user: root
+  gather_facts: yes
+
+  tasks:
+    - name: Run with items greater than 5
+      debug:
+        msg: echo {{ item }}
+      loop: [ 0, 2, 4, 6, 8, 10 ]
+      when: item > 5

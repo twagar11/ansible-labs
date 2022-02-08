@@ -1,0 +1,28 @@
+---
+
+- hosts: webservers
+  become: yes
+  become_user: root
+  gather_facts: yes
+
+
+  tasks:
+
+    - name: Register a variable
+      ansible.builtin.shell: cat /home/ubuntu/a.txt
+      register: motd_contents
+
+    - name: print the variable
+      debug:
+        msg: "{{ motd_contents.stdout }}"
+
+    - name: print the variable
+      debug:
+        msg: "{{ motd_contents.stdout.find('hi') }}"
+
+
+
+    - name: Use the variable in conditional statement
+      debug:
+        msg: "file contains the word hi"
+      when: motd_contents.stdout.find('hi') != -1
