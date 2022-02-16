@@ -4,7 +4,7 @@
 
 In this lab, You will create two groups and add two machines to each group.  
 
-basically, We are going to create an `Inventory` 
+Basically, We are going to create an `Inventory` 
 
 
 ## Duration
@@ -12,11 +12,11 @@ basically, We are going to create an `Inventory`
 25 minutes
 
 
-## Step 1 - Knowing your ansible
+## Step 1 — Knowing your ansible
 
 At this point, you should have `ansible` installed. 
 
-go to `ansible` directory
+Go to `ansible` directory
 
 ```bash
 $ cd /etc/ansible
@@ -37,7 +37,7 @@ ansible.cfg  hosts
 
 ## Step 2 - Install `nano`
 
-to keep commands as simple as possible, we'll use `nano`
+To keep commands as simple as possible, we'll use `nano`
 
 ```bash
 $ sudo apt-get install nano -y
@@ -54,7 +54,7 @@ ssh localhost  # you may have to type in yes when asking for a key
 exit
 ```
 
-If this does not work, you need to configure the key for passwordless ssh to localhost
+If this does not work, you need to configure the key for `passwordless` ssh to localhost.
 
 ```bash
 ssh-keygen -t rsa # Press enter for each line
@@ -63,7 +63,7 @@ chmod og-wx ~/.ssh/authorized_keys
 ```
 
 
-## Step 3 - Add Groups
+## Step 3 — Add Groups
 
 We need to add our new hosts to our `/etc/ansible/hosts` file
 
@@ -71,7 +71,7 @@ We need to add our new hosts to our `/etc/ansible/hosts` file
 $ sudo nano /etc/ansible/hosts
 ```
 
-create the following groups by adding them to the last lines
+Create the following groups by adding them to the last lines.
 
 ```console
 [webservers]
@@ -81,9 +81,9 @@ create the following groups by adding them to the last lines
 
 Keep the file open and go to the next step
 
-## Step 4 - Add Hosts
+## Step 4 — Add Hosts
 
-add the designated servers to each group. 
+Add the designated servers to each group. 
 
 Your file should look like:
 
@@ -99,16 +99,16 @@ Your file should look like:
 ```
 Keep the file open and go to the next step
 
-## Step 4 - Define username and password for Hosts
+## Step 4 — Define a username and password for Hosts
 
-Since `ansible` relies on `ssh` to connect to hosts, we need to tell ansible what `username` and `password` it should use
+Since `ansible` relies on `ssh` to connect to host, we need to tell ansible what `username` and `password` it should use.
 
-syntax is: `[GroupName:vars]`
+Syntax is: `[GroupName:vars]`
 
-for `[webserver]` add `[webserver:vars]` after the last host
+For `[webserver]` add `[webserver:vars]` after the last host
 
-variable for username is: `ansible_user`  
-variable for password is: `ansible_ssh_pass`
+Variable for username is: `ansible_user`  
+Variable for password is: `ansible_ssh_pass`
 
 output
 ```console
@@ -117,7 +117,7 @@ ansible_user=<Username>
 ansible_ssh_pass=<Password>
 ```
 
-now, what if each host has a unique password?
+Now, what if each host has a unique password?
 In this scenario `ansible_ssh_pass` will be placed in front of each host with a space
 
 ```console
@@ -139,7 +139,7 @@ ansible_user=<Username> # ( ubuntu in our environment )
 ```
 
 
-to save the file press `ctrl+O` and to exit press `ctrl+X`
+To save the file press `ctrl+O` and to exit press `ctrl+X`
 
 
 ## Well done! 👏

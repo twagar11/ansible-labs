@@ -2,13 +2,13 @@
 
 # Overview
 
-In this lab, You will learn how to create, copy and delete files and folders on your hosts using `file` module
+In this lab, You will learn how to create, copy and delete files and folders on your hosts using `file` module.
 
 ## Duration
 
 25 minutes
 
-## Step 1 - getting to know the Module `file`
+## Step 1 — getting to know the Module `file`
 
 `file` module is used manipulate files and folders on your hosts, this module takes two arguments:
 
@@ -19,7 +19,7 @@ Optional arguments:
 
 - `owner`, the owner user on hosts
 - `group`, the owner group on hosts
-- `state`, to remove, or create folder/file on hosts.
+- `state`, to remove, or create a folder/file on hosts.
 - `mode`, to set permissions on your files
 
 default template looks like:
@@ -28,9 +28,9 @@ default template looks like:
 $ ansible <Host-Group> -m file -a "src=<FULL-PATH> dest=<Host-FULL-PATH>"
 ```
 
-## Step 2 - Copy a file
+## Step 2 — Copy a file
 
-run the following command to create a file on `C&C`
+Run the following command to create a file on `C&C`
 
 ```bash
 $ cd ~
@@ -40,9 +40,9 @@ $  touch hello.txt
 $ nano hello.txt 
 ```
 
-write `Hello World` to `hello.txt` and save the file
+Write `Hello World` to `hello.txt` and save the file
 
-now, to copy the file to our `webserver` group,
+Now, to copy the file to our `webserver` group,
 
 ```bash
 $ ansible webserver -m copy -a "src=~/hello.txt dest=~"
@@ -87,21 +87,21 @@ output
 }
 ```
 
-note the status:
+Note the status:
 
 ```console
 CHANGED
 ```
 
-it means something on your hosts is changed.
+It means something on your hosts is changed.
 
-**NOTE:** every file/folder that you put on your hosts that are without specified `user` or `group` takes the authenticated ones from your `hosts` file
+**NOTE:** every file/folder that you put on your hosts that are without specified `user` or `group` takes the authenticated ones from your `hosts` file.
 
-Login to each host and verify that the file is there
+Login to each host and verify that the file is there.
 
 ## Step 2 - Delete a file
 
-to delete a file on your hosts use the following command
+to delete a file on your hosts use the following command.
 
 ```bash
 $ ansible webserver -m file -a "dest=~/hello.txt state=absent"
@@ -133,11 +133,11 @@ output
 }
 ```
 
-Login to each host and verify that the file is deleted
+Login to each host and verify that the file is deleted.
 
-## Step 3 - Create Directory
+## Step 3 — Create Directory
 
-to create directory, first create it on `C&C`
+To create a directory, first create it on `C&C`
 
 ```bash
 $ cd ~
@@ -150,7 +150,7 @@ $ touch hello.txt
 $ nano hello.txt 
 ```
 
-write "Hello File" to the file, save and exit
+Write `Hello File` to the file, save and exit
 
 ```bash
 $ ansible webserver -m file -a "dest=~/test state=directory"
@@ -189,7 +189,7 @@ output
 }
 ```
 
-login to each host, you'll notice that directories are there, but the file you've created is not there, now you have to copy the file
+Login to each host, you'll notice that directories are there, but the file you've created is not there, now you have to copy the file.
 
 ```bash
 $ ansible webserver -m copy -a "src=~/test/ dest=~/test"
@@ -197,9 +197,9 @@ $ ansible webserver -m copy -a "src=~/test/ dest=~/test"
 
 **NOTE:** notice that we are not mentioning a specific file thus copying everything inside the directory.
 
-login to each host, to verify the folder and file
+Login to each host, to verify the folder and file
 
-## Step 4 - Delete Directory
+## Step 4 — Delete Directory
 
 Delete a specific directory from all hosts in the `websever` group with the following command:
 
@@ -207,12 +207,12 @@ Delete a specific directory from all hosts in the `websever` group with the foll
 $ ansible webserver -m file -a "dest=~/test state=absent"
 ```
 
-## Step 5 - Practice
+## Step 5 — Practice
 
-using what you just learned, try to:
+Using what you just learned, try to:
 
 - create a directory in `~/<Your-Name>/<Your-Family>`
-- create two `txt` files inside the directory and write your email and name into them
+- create two `txt` files inside the directory and write your email and name into them.
 - use ansible to push all these files to your hosts
 
 ## Well done! 👏

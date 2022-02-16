@@ -2,7 +2,7 @@
 
 # Overview
 
-In this lab, You will learn how to get input from user while running a playbook
+In this lab, You will learn how to get input from user while running a playbook.
 
 
 
@@ -10,7 +10,7 @@ In this lab, You will learn how to get input from user while running a playbook
 
 45 minutes
 
-## Step 1 - creating a playbook to prompt for input
+## Step 1 — creating a playbook to prompt for input
 
 
 
@@ -33,7 +33,7 @@ In this lab, You will learn how to get input from user while running a playbook
         msg: 'Logging in as {{ username }}'
 ```
 
-save and run the playbook
+Save and run the playbook
 
 ```bash
 $ ansible-playbook playbook.yml

@@ -2,7 +2,7 @@
 
 # Overview
 
-Roles let you automatically load related vars, files, tasks, handlers, and other Ansible artifacts based on a known file structure. After you group your content in roles, you can easily reuse them and share them with other users.
+Roles let you automatically load related vars, files, tasks, handlers and other Ansible artifacts based on a known file structure. After you group your content in roles, you can easily reuse them and share them with other users.
 
 
 ## Duration
@@ -34,7 +34,7 @@ roles/
         meta/
 ```
 
-By default Ansible will look in each directory within a role for a main.yml file for relevant content (also main.yaml and main):
+By default, Ansible will look in each directory within a role for a main.yml file for relevant content (also main.yaml and main):
 
 - `tasks/main.yml` - the main list of tasks that the role executes.
 - `handlers/main.yml` - handlers, which may be used within or outside this role.

@@ -13,7 +13,7 @@ We are going to create some directories and define our hosts there.
 30 minutes
 
 
-## Step 1 - Create project
+## Step 1 — Create project
 
 Create your project folder.
 
@@ -45,11 +45,11 @@ $ touch ~/our-big-project/inventories/production/webserver
 
 Just like [this](Configure-Inventory.md) lab, add your hosts.
 
-**BEST PRACTICE:** Only add one group per file.
+**BEST PRACTICE:** Only add one group per a file.
 
-## Step 3 - Test the Host file
+## Step 3 — Test the Host file
 
-try to ping the hosts in the new inventory
+Try to ping the hosts in the new inventory
 
 ```bash
 $ cd ~/our-big-project/inventories/production/
@@ -59,7 +59,7 @@ $ ansible -i webserver -m ping
 
 ## Exercise
 
-Try to define some domains and try to add them to your hosts
+Try to define some domains and try to add them to your hosts.
 
 
 ## Well done! 👏

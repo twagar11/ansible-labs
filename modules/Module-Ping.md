@@ -2,9 +2,9 @@
 
 # Overview
 
-In this lab, You will learn how to confirm the connection between your control center and hosts
+In this lab, You will learn how to confirm the connection between your control center and hosts.
 
-basically, We are going to use a module called `ping` 
+Basically, We are going to use a module called `ping` 
 
 
 ## Duration
@@ -16,20 +16,20 @@ basically, We are going to use a module called `ping`
 
 In our labs, are hosts are using password for authentication. 
 
-Ansible needs another application called `sshpass` to connect to hosts.
+Ansible needs another application called `sshpass` to connect to host.
 
-run the following command only on your control center
+Run the following command only on your control center
 
 ```bash
 $ sudo apt-get install -y sshpass
 ```
 
-to confirm that `sshpass` is installed use the following command:
+To confirm that `sshpass` is installed use the following command:
 
 ```bash
 $ sshpass -V
 ```
-output will look like:
+Output will look like:
 
 ```console
 sshpass 1.06
@@ -42,9 +42,9 @@ Using "assword" as the default password prompt indicator.
 ```
 
 
-## Step 2 - getting to know the Module `ping`
+## Step 2 — getting to know the Module `ping`
 
-`ping` module is use to verify connectivity between the control center and hosts
+`ping` module is used to verify connectivity between the control center and hosts.
 
 default template looks like:
 
@@ -54,7 +54,7 @@ $ ansible <Host-Group> -m ping
 
 ## Step 3 - Running a sample
 
-run the following command to see the results
+Run the following command to see the results
 
 ```bash
 $ ansible webserver -m ping
@@ -80,7 +80,7 @@ output
 
 ```
 
-note the following part
+Note the following part
 ```console
     SUCCESS
     "changed": false,

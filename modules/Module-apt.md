@@ -2,7 +2,7 @@
 
 # Overview
 
-In this lab, You will learn how to install, update and remove packages on your hosts using `apt` module
+In this lab, You will learn how to install, update and remove packages on your hosts using `apt` module.
 
 ## Duration
 
@@ -32,15 +32,15 @@ run the following command to install apache on your hosts, we'll use `appserver`
 $ ansible appserver -m apt -a "name=apache2 state=present" -b
 ```
 
-output will be very long, look out for `CHANGED`
+Output will be long, look out for `CHANGED`
 
-note the `-b` switch, what is that?
+Note the `-b` switch, what is that?
 
 Basically we are telling `ansible` to run this command as `root` on all hosts.
 
 Login to each host and verify that `apache2` is installed
 
-command to verify:
+Command to verify:
 
 ```bash
 $ apache2 -v
@@ -53,19 +53,19 @@ Server version: Apache/2.4.41 (Ubuntu)
 Server built:   2021-07-05T07:16:56
 ```
 
-## Step 2 - remove the package
+## Step 2 — remove the package
 
-to remove the installed package on your hosts:
+To remove the installed package on your hosts:
 
 ```bash
 $ ansible appserver -m apt -a "name=apache2 state=absent autoremove=yes" -b
 ```
 
-what is `autoremove`?
+What is `autoremove`?
 If yes, remove unused dependency packages for all module states except.
 
 
-## Step 3 - Modules repository
+## Step 3 — Modules repository
 
 You can find a list of all module at the following link:
 

@@ -2,7 +2,7 @@
 
 # Overview
 
-In this lab, You will lean how to install Ansible on your control machine
+In this lab, You will lean how to install Ansible on your control machine.
 
 
 ## Duration
@@ -17,7 +17,7 @@ In this lab, You will lean how to install Ansible on your control machine
 - Use the provided password to login and access desktop.
 - Open a terminal.
 
-## Step 2 - Installing Ansible
+## Step 2 — Installing Ansible
 
 Confirm that you have ansible installed as follows
 
@@ -25,7 +25,7 @@ Confirm that you have ansible installed as follows
 $ ansible --version
 ```
 
-And you should get the following response:
+You should get the following response:
 
 ```console
 ansible 2.9.6
@@ -45,6 +45,6 @@ $ sudo apt-add-repository --yes --update ppa:ansible/ansible
 $ sudo apt-get install ansible
 ```
 
-try to the get the `ansible` version.
+Try to the get the `ansible` version.
 
 ## Well done! 👏
