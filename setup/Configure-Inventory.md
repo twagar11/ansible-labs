@@ -142,4 +142,15 @@ ansible_user=<Username> # ( ubuntu in our environment )
 To save the file press `ctrl+O` and to exit press `ctrl+X`
 
 
+## Test the changes
+
+Go ahead and run the following command:
+
+```bash
+ansible webserver -m ping
+```
+
+If all succeeds then you are good to go.
+
+
 ## Well done! 👏
