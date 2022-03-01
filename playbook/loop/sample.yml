@@ -15,4 +15,11 @@
         - htop
         - git
 
-
+    - name: Print a list
+        debug:
+          msg: "Hello, {{ item }}"
+        with_items:
+          - John
+          - Jane
+          - Alex
+          - sarah
