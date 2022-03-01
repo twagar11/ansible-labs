@@ -6,21 +6,19 @@
   gather_facts: no
 
 
-  vars:
-    pkgname: apache2
 
 
   tasks:
-    - name: Install "{{ pkgname }}"
+
+    - name: Install Package
       apt:
-        name: "{{ pkgname }}"
-        state: present
-      notify:
-        - Restart "{{ pkgname }}"
+        name: apache2
+      notify: sucs_msg
+
 
 
   handlers:
-    - name: Restart "{{ pkgname }}"
-      service:
-        name: "{{ pkgname }}"
-        state: restarted
+
+    - name: sucs_msg
+      debug:
+        msg: Package has been Installed
