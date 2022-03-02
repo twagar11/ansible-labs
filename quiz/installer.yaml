@@ -1,0 +1,15 @@
+---
+- hosts: appservers
+  tasks:
+    - name: Copy to hosts
+      copy:
+        src: "a-nocontent.txt"
+        dest: "/home/ubuntu/a.txt"
+
+
+- hosts: webservers
+  tasks:
+    - name: Copy to hosts
+      copy:
+        src: "a-hello.txt"
+        dest: "/home/ubuntu/a.txt"
