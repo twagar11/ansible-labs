@@ -1,15 +1,30 @@
 ---
-- hosts: appservers
-  tasks:
-    - name: Copy to hosts
-      copy:
-        src: "a-nocontent.txt"
-        dest: "/home/ubuntu/a.txt"
+- hosts: all
+  become: yes
+  become_user: root
+  gather_facts: no
+
+  vars_prompt:
+    - name: pkgname
+      prompt: Enter package name
+      private: not
 
 
-- hosts: webservers
   tasks:
-    - name: Copy to hosts
-      copy:
-        src: "a-hello.txt"
-        dest: "/home/ubuntu/a.txt"
+
+    - name: Register a variable
+      shell: cat /home/ubuntu/a.txt
+      register: motd_contents
+
+    - name: install "{{ pkgname }}"
+      apt:
+        name: "{{ pkgname }}"
+        state: present
+      when: motd_contents.stdout.find('hello') !=-1
+
+    - name: remove "{{ pkgname }}"
+      apt:
+        name: "{{ pkgname }}"
+        state: absent
+        autoremove: yes
+      when: motd_contents.stdout.find('hello') >=0
