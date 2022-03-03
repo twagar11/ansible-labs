@@ -1,0 +1,26 @@
+---
+
+- hosts: webservers
+
+  gather_facts: no
+
+  vars:
+    name: John
+
+  tasks:
+    - name: putting file on the server
+      block:
+
+        - name: put the template
+          template:
+            src: t.txt.jn2
+            dest: /home/ubuntu/t.txt
+
+        - shell: /bin/fail
+
+      rescue:
+
+        - name: remove file
+          file:
+            dest: /home/ubuntu/t.txt
+            state: absent
