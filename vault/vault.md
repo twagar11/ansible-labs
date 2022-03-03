@@ -45,9 +45,9 @@ So you already have all your passwords and sensitive information in a file — i
 This is the file
 
 ```text
-ansible_user: "roger"
-ansible_ssh_pass"cisco"
-ansible_network_os: "ios" 
+db_user: "roger"
+db_ssh_pass: "cisco"
+db_network_os: "ios" 
 ```
 
 We are going to encrypt it and then design a playbook that needs that password information and see what happens.
